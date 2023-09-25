@@ -18,6 +18,10 @@ module.exports = {
         textColor: '#0B090A',
         backgroundColor: '#E6EDEF'
       },
+      fontFamily: {
+        'Cinzel': ['Cinzel', ],
+        'fauna-regular': ['Fauna One', 'sans'],
+      },
     },
   },
   plugins: [],
