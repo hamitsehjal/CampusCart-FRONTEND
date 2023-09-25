@@ -14,7 +14,8 @@ module.exports = {
       },
       colors: {
         primaryColor1: '#8D0801',
-        textColor: '#E6EDEF',
+        headingColor: '#E6EDEF',
+        textColor: '#0B090A',
         backgroundColor: '#E6EDEF'
       },
     },
