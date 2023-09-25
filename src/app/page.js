@@ -1,4 +1,5 @@
 import NavbarLogin from '../components/NavbarLogin';
+import Link from 'next/link';
 
 const LoginPage = () => {
   return (
@@ -132,8 +133,8 @@ const LoginPage = () => {
             </div>
             {/*PARTNER REGISTRATION BUTTON*/}
             <div className="text-center ">
-              <a
-                href="/partner-registration"
+              <Link
+                href="/PartnerRegistration"
                 className="text-sm text-textColor hover:underline flex items-center justify-center"
               >
                 Partner Registration
@@ -153,7 +154,7 @@ const LoginPage = () => {
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </form>
         </div>
