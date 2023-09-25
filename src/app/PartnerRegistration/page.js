@@ -126,7 +126,19 @@ const PartnerRegistration = () => {
                 required
               />
             </div>
-
+            {/* Checkbox */}
+            <div className="mb-4">
+              <label className="">
+                <input
+                  type="checkbox"
+                  id="acceptTerms"
+                  name="acceptTerms"
+                  className="mr-2 leading-tight"
+                  required
+                />
+                Accept Terms and Conditions<span className="text-red-500">*</span>
+              </label>
+            </div>
             {/* Submit Button */}
             <div className="text-center">
               <button
