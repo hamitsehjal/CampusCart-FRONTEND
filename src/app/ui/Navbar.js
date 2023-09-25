@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
 import logo from '../../../public/images/logo.png';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,11 +19,11 @@ const navMenu = [
 ];
 
 const Navbar = () => {
-  //   const [navOpen, setNavOpen] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
 
-  //   const mobileHandler = () => {
-  //     setNavOpen(!navOpen);
-  //   };
+  const mobileHandler = () => {
+    setNavOpen(!navOpen);
+  };
 
   return (
     <>
@@ -73,28 +74,32 @@ const Navbar = () => {
               </Link>
 
               <button className="block lg:hidden">
-                <HiBars3 className="text-3xl" />
+                <HiBars3 className="text-3xl" onClick={mobileHandler} />
               </button>
             </div>
             <div></div>
           </div>
         </div>
       </header>
-      {/* Mobile/Tablet
-      <div className={navOpen ? 'py-0' : ''}>
+      {/* Mobile/Tablet */}
+      <div
+        className={
+          navOpen ? 'py-0 block fixed w-screen z-[9999]' : 'py-0 hidden fixed w-screen z-[9999]'
+        }
+      >
         <div
           className="h-screen w-screen z-[999] top-0 fixed bg-black bg-opacity-50"
           onClick={mobileHandler}
         ></div>
 
-        <div className="bg-white w-[380px] top-0 right-0 z-[9999] h-screen fixed">
-          <div className="h-14 px-10 border-b flex items-center">
-            <button className="flex items-center space-x-3">
+        <div className="bg-white w-full md:w-[380px] top-0 right-0 z-[9999] h-screen fixed">
+          <div className="h-14 px-4 md:px-10 border-b flex items-center">
+            <button className="flex items-center space-x-3 " onClick={mobileHandler}>
               <GrClose />
               <span>Close</span>
             </button>
           </div>
-          <div className="h-full py-3 px-10 pb-20 overflow-y-scroll scroll-smooth">
+          <div className="h-full py-3 px-4 md:px-10 pb-20 overflow-y-scroll scroll-smooth">
             <ul className="block mb-7">
               {navMenu.map((item, idx) => (
                 <li key={item.label}>
@@ -103,39 +108,35 @@ const Navbar = () => {
                     className="group flex items-center py-2 duration-300 transition-all ease-in-out hover:text-primary"
                   >
                     <span>{item.label}</span>
-                    <span className="left-2 relative duration-300 transition-all ease-in-out opacity-0 group-hover:Opacity-100 group-hover:left-3">
+                    <span className="left-2 relative duration-300 transition-all ease-in-out opacity-0 group-hover:opacity-100 group-hover:left-3">
                       <BiChevronRight className="text-xl" />
                     </span>
                   </Link>
                 </li>
               ))}
-              <li>
+              <li className="md:flex md:items-center">
                 <input
                   type="text"
                   placeholder="Search"
-                  className="px-4 py-2 border rounded-lg lg:inline-block"
+                  className="px-4 py-2 border rounded-lg mt-2 md:mr-2 md:mt-0 w-full md:w-auto"
                 />
-              </li>
-              <li>
                 <Link
                   href="#"
-                  className="px-10 py-2 mt-2 bg-primary2 text-white rounded-lg lg:inline-block"
+                  className="px-4 py-2 bg-primary2 text-white rounded-lg mt-2 md:mt-0 w-full md:w-auto"
                 >
                   Search
                 </Link>
               </li>
-              <li>
+              <li className="md:flex md:items-center">
                 <Link
                   href="#"
-                  className="px-11 py-2 mt-2 bg-primary2 text-white rounded-lg hidden lg:inline-block"
+                  className="px-4 py-2 mt-2 bg-primary2 text-white rounded-lg md:inline-block"
                 >
                   Log In
                 </Link>
-              </li>
-              <li>
                 <Link
                   href="#"
-                  className="px-10 py-2 mt-2 bg-primary2 text-white rounded-lg hidden lg:inline-block"
+                  className="px-4 py-2 mt-2 bg-primary2 text-white rounded-lg md:inline-block ml-2"
                 >
                   Sign Up
                 </Link>
@@ -143,7 +144,7 @@ const Navbar = () => {
             </ul>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };
