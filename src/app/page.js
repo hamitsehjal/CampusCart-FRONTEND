@@ -1,4 +1,5 @@
 import NavbarLogin from '../components/NavbarLogin';
+import Link from 'next/link';
 
 const LoginPage = () => {
   return (
@@ -107,13 +108,13 @@ const LoginPage = () => {
             </div>
             {/*SIGNUP BUTTON*/}
             <div className="mb-3 text-center ">
-              <a
+              <Link
                 href="/student-registration"
                 className="text-sm text-textColor hover:underline flex items-center justify-center"
               >
                 Sign Up
                 <svg
-                  class="w-6 h-6 "
+                  className="w-6 h-6 "
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -122,23 +123,23 @@ const LoginPage = () => {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
             {/*PARTNER REGISTRATION BUTTON*/}
             <div className="text-center ">
-              <a
-                href="/partner-registration"
+              <Link
+                href="/PartnerRegistration"
                 className="text-sm text-textColor hover:underline flex items-center justify-center"
               >
                 Partner Registration
                 <svg
-                  class="w-6 h-6 "
+                  className="w-6 h-6 "
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -147,13 +148,13 @@ const LoginPage = () => {
                   stroke="currentColor"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           </form>
         </div>
