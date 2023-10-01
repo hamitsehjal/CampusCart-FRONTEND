@@ -1,0 +1,1 @@
+// This repo holds all the static assets of our application
