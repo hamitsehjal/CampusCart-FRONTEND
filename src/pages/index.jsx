@@ -4,7 +4,7 @@ export default function Homepage() {
     return (
         <div>
             <Layout />
-            <h1>This is the Homepage</h1>
+            <h1 className="text-2xl text-center">This is the Homepage</h1>
         </div>
     )
 }
