@@ -7,5 +7,5 @@ All notable changes to the Grocery Delivery Application Frontend will be documen
 - Configured Next.js for the project.
 - Integrated Tailwind CSS for styling.
 - Implemented basic project configuration.
-- Added initial documentation files (README, CONTRIBUTING, PROJECT_STRUCTURE).
+- Added initial documentation files (README, CONTRIBUTING).
 
