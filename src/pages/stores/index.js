@@ -1,0 +1,1 @@
+// src/pages/stores/index.js
