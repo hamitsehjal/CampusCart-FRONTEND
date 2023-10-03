@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+import { fontFamily } from 'tailwindcss/defaultTheme';
+
 module.exports = {
   content: [
     './src/**/*.{jsx,js}',
@@ -17,6 +19,11 @@ module.exports = {
         'campus-background': '#E6EDEF',
         'campus-text': '#0B090A',
         'campus-accent': '#B50603',
+      },
+      fontFamily: {
+        cinzel: ['var(--font-sans)', ...fontFamily.sans],
+        noto_serif: ['var(--font-serif)', ...fontFamily.serif],
+        space_mono: ['var(--font-mono)', ...fontFamily.mono],
       }
     },
   },
