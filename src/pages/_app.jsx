@@ -1,5 +1,6 @@
 
 // For more information: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
+import Layout from '@/components/layout';
 import '@/styles/globals.css';
 import {
     Cinzel,
@@ -39,6 +40,8 @@ export default function MyApp({ Component, pageProps }) {
                     `
                 }
             </style>
-            <Component>{pageProps}</Component>
+            <Layout>
+                <Component>{pageProps}</Component>
+            </Layout>
         </>)
 }
