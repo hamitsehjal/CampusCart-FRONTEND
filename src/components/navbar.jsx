@@ -1,6 +1,6 @@
 // This is the Navbar Component of CampusCart
 import { useState } from 'react';
-import { ShoppingCartIcon, Bars4Icon, XCircleIcon } from '@heroicons/react/24/outline';
+import { RiShoppingBasket2Line, RiMenuLine, RiCloseCircleLine } from 'react-icons/ri'
 import Link from 'next/link';
 export default function Navbar() {
 
@@ -16,7 +16,7 @@ export default function Navbar() {
                     {/* Logo  */}
                     <div>
                         <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl" href='#'>
-                            <ShoppingCartIcon className="h-6  md:h-10 lg:h-16 w-6 md:w-10 lg:w-16 text-campus-background" />
+                            <RiShoppingBasket2Line className="h-6  md:h-10 lg:h-16 w-6 md:w-10 lg:w-16 text-campus-background" />
                             <span className="text-xl md:text-2xl font-noto_serif">CampusCart</span>
                         </Link>
                     </div>
@@ -38,7 +38,7 @@ export default function Navbar() {
                     <div className='lg:hidden flex flex-col items-center justify-center text-xl'>
                         <button onClick={toggleMenu}>
                             {!isOpen ?
-                                <Bars4Icon className='h-6 w-6' /> : <XCircleIcon className='h-6 w-6' />
+                                <RiMenuLine className='h-6 w-6' /> : <RiCloseCircleLine className='h-6 w-6' />
                             }
 
                         </button>
