@@ -45,7 +45,7 @@ export default function Navbar() {
 
             </div>
 
-            {isOpen && <div className='grid grid-cols-2 gap-2 p-4 text-campus-background font-noto_serif'>
+            {isOpen && <div className='grid grid-cols-2 lg:hidden gap-2 p-4 text-campus-background font-noto_serif'>
                 {/* Links */}
                 <div className='flex flex-col'>
                     <Link href='#'>Home</Link>
