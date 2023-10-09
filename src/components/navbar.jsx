@@ -48,7 +48,7 @@ export default function Navbar() {
         <div className="hidden lg:flex flex-row gap-x-4 items-center justify-end text-xl">
           <Link
             className="px-4 py-2 font-noto_serif text-sm bg-campus-text text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
-            href="#"
+            href="/login"
           >
             Login
           </Link>
@@ -81,7 +81,7 @@ export default function Navbar() {
           </div>
           {/* Buttons */}
           <div className="flex flex-col gap-2 justify-end p-2">
-            <Link className="flex flex-row gap-2 items-center" href="#">
+            <Link className="flex flex-row gap-2 items-center" href="/login">
               <RiLoginBoxLine className="h-6 w-6" />
               <span className="text-sm">Login</span>
             </Link>
