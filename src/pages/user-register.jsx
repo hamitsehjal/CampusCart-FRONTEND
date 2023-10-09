@@ -128,6 +128,12 @@ export default function UserRegister() {
             value={formData.password}
           />
         </div>
+        {/* Register Button */}
+        <div className="text-center">
+          <button className="bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent">
+            Register
+          </button>
+        </div>
       </div>
     </div>
   );
