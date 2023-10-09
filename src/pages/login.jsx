@@ -49,6 +49,12 @@ export default function Login() {
           </label>
           <span className="text-campus-accent text-sm">{errors.password}</span>
         </div>
+        {/* Register Button */}
+        <div className="text-center">
+          <button className="bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent">
+            Login
+          </button>
+        </div>
       </form>
     </div>
   );
