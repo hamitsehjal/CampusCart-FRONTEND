@@ -16,7 +16,7 @@ export default function Footer() {
                             <Link href='#'>Become a Partner</Link>
                             <Link href='#'>Log In</Link>
                             <Link href='#'>Sign Up</Link>
-                            <Link href='#'>Stores</Link>
+                            <Link href='/stores'>Stores</Link>
                             <Link href='#'>Media & Community</Link>
                         </div>
                     </div>
