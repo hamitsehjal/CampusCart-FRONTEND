@@ -37,19 +37,19 @@ export default function Homepage() {
           Top Stores
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 py-20 px-10">
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                7 Eleven
             </div>
           </div>
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <Image src={StoreImages.Costco} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Costco
             </div>
           </div>
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <Image src={StoreImages.DollarTree} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Dollar Tree
@@ -64,7 +64,7 @@ export default function Homepage() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 py-20 px-10">
           {/* Become A Partner */}
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <div>
               <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
                 <div>
@@ -77,7 +77,7 @@ export default function Homepage() {
             </div>
           </div>
           {/* Pick Up Location*/}
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <div>
               <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
                 <div>
@@ -90,7 +90,7 @@ export default function Homepage() {
             </div>
           </div>
           {/* Review */}
-          <div className="flex flex-col gap-5 items-center">
+          <div className="flex flex-col gap-5 items-center py-4">
             <div>
               <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
                 <div>
