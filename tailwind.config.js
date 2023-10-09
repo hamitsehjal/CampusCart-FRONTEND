@@ -16,7 +16,8 @@ module.exports = {
         'campus-secondary': '#66748F',
 
         // Additional colors 
-        'campus-background': '#E7D6E7',
+        // 'campus-background': '#E7D6E7',
+        'campus-background': '#ffffff',
         'campus-text': '#0B090A',
         'campus-accent': '#B50603',
       },
