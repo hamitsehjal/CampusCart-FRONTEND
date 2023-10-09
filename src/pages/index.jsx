@@ -3,8 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { HomePageImage, StoreImages, CategoriesImages } from '../../public'
-
-
+import { RiStore3Fill } from 'react-icons/ri'
 
 export default function Homepage() {
   return (
@@ -17,7 +16,7 @@ export default function Homepage() {
         <h3 className="text-black font-bold text-[24px] lg:text-[48px] leading-[1.2] font-noto_serif">Best Groceries app ever. Pick your desired groceries from the menu.</h3>
 
         <div className="bg-campus-accent text-white text-[24px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-campus-secondary">
-          Join Now
+          Sign Up Now
         </div>
       </div>
 
@@ -35,26 +34,26 @@ export default function Homepage() {
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-20">
           <div className="flex flex-col gap-5 items-center">
-            <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} />
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl">
+            <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                7 Eleven
             </div>
           </div>
           <div className="flex flex-col gap-5 items-center">
-            <Image src={StoreImages.Costco} alt="v1" width={100} height={100} />
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl">
+            <Image src={StoreImages.Costco} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Costco
             </div>
           </div>
           <div className="flex flex-col gap-5 items-center">
-            <Image src={StoreImages.DollarTree} alt="v1" width={100} height={100} />
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl">
+            <Image src={StoreImages.DollarTree} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Dollar Tree
             </div>           
           </div>
           <div className="flex flex-col gap-5 items-center">
-            <Image src={StoreImages.IndianMart} alt="v1" width={100} height={100} />
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl">
+            <Image src={StoreImages.IndianMart} alt="v1" width={100} height={100} className='hover:cursor-pointer' />
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Indian Market
             </div>           
           </div>
@@ -64,4 +63,3 @@ export default function Homepage() {
   );
 }
 
-    
