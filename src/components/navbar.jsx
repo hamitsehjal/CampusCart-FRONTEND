@@ -22,8 +22,8 @@ export default function Navbar() {
                 {/* Home 
             Contact US  */}
                 <div className="hidden lg:flex flex-row gap-x-4 items-center justify-start text-xl">
-                    <Link href='#' className='font-noto_serif'>Home</Link>
-                    <Link href='#' className='font-noto_serif'>Benefits</Link>
+                    <Link href='/' className='font-noto_serif'>Home</Link>
+                    <Link href='/stores' className='font-noto_serif'>Stores</Link>
                     <Link href='#' className='font-noto_serif'>Contact Us</Link>
                 </div>
 
@@ -48,8 +48,8 @@ export default function Navbar() {
             {isOpen && <div className='grid grid-cols-2 lg:hidden gap-2 p-4 text-campus-background font-noto_serif'>
                 {/* Links */}
                 <div className='flex flex-col'>
-                    <Link href='#'>Home</Link>
-                    <Link href='#'>Benefits</Link>
+                    <Link href='/'>Home</Link>
+                    <Link href='/stores'>Stores</Link>
                     <Link href='#'>Contact Us</Link>
                 </div>
                 {/* Buttons */}
