@@ -99,6 +99,15 @@ export default function Login() {
           </button>
         </div>
       </form>
+      {/* Forgot Password Button */}
+      <div className="text-center mt-4">
+        <button
+          className="text-campus-blue hover:underline"
+          //onClick={() => router.push("#")}  // TO DO: Change route to forgot password page
+        >
+          Forgot Password?
+        </button>
+      </div>
     </div>
   );
 }
