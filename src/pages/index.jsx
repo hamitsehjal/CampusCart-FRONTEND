@@ -4,6 +4,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { HomePageImage, StoreImages, CategoriesImages } from '../../public'
 import { RiStore3Fill } from 'react-icons/ri'
+import { FaMapLocationDot } from 'react-icons/fa6'
+import { VscFeedback } from 'react-icons/vsc'
+
+
 
 export default function Homepage() {
   return (
@@ -32,7 +36,7 @@ export default function Homepage() {
         <p className=" text-3xl lg:text-5xl font-cinzel font-semibold text-campus-text text-center mt-3">
           Top Stores
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-16 py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 py-20 px-10">
           <div className="flex flex-col gap-5 items-center">
             <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
@@ -51,15 +55,56 @@ export default function Homepage() {
                Dollar Tree
             </div>           
           </div>
+        </div>
+      </div>
+
+    <div className="mx-auto py-10 flex-row">
+        <div className=" text-3xl lg:text-5xl font-cinzel font-semibold text-campus-text text-center mt-3">
+          Things to Know
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 py-20 px-10">
+          {/* Become A Partner */}
           <div className="flex flex-col gap-5 items-center">
-            <Image src={StoreImages.IndianMart} alt="v1" width={100} height={100} className='hover:cursor-pointer' />
+            <div>
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+                <div>
+                  <RiStore3Fill className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
+                </div>
+              </Link>
+            </div>
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Indian Market
-            </div>           
+               Become Partner
+            </div>
+          </div>
+          {/* Pick Up Location*/}
+          <div className="flex flex-col gap-5 items-center">
+            <div>
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+                <div>
+                  <FaMapLocationDot className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
+                </div>
+              </Link>
+            </div>
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+               Pick Up Locations
+            </div>
+          </div>
+          {/* Review */}
+          <div className="flex flex-col gap-5 items-center">
+            <div>
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+                <div>
+                  <VscFeedback className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
+                </div>
+              </Link>
+            </div>
+            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+               Reviews
+            </div>
           </div>
         </div>
-      </div></>
-    
+      </div>
+      </>    
   );
 }
 
