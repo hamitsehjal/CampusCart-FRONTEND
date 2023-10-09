@@ -9,7 +9,7 @@ import { HomePageImage } from '../../public'
 export default function Homepage() {
   return (
     <div className="outline-none border-none relative">
-      <div className="absolute left-[30px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[50%] -translate-y-[50%] space-y-2 lg:space-y-4 bg-[#ffffffa2] sm:bg-transparent p-4 sm:p-0 rounded-lg campus-accent">
+      <div className="absolute left-[30px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[70%] -translate-y-[70%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
         <h1 className="text-campus-accent text-4xl lg:text-[70px] font-bold leading-[1.2]">
           Bring the Store to your Doors
         </h1>
@@ -21,7 +21,7 @@ export default function Homepage() {
       </div>
 
       <Image
-        className="w-[100%] h-[400px] md:h-auto object-cover object-right md:object-left-bottom"
+        className="w-[100%] h-[400px] md:h-auto object-cover object-right md:object-left-bottom opacity-30"
         src={HomePageImage.grocery1}
         alt="banner"
         width={2000}
