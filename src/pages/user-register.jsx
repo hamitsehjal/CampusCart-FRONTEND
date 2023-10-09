@@ -9,16 +9,17 @@ export default function UserRegister() {
     emailAddress: "",
     password: "",
     profilePicture: null,
+    acceptTerms: false,
   };
 
   const [formData, setFormData] = useState(clearFormData);
-
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
     studentId: "",
     emailAddress: "",
     password: "",
+    acceptTerms: "",
   });
 
   const handleImageChange = (e) => {
@@ -34,33 +35,32 @@ export default function UserRegister() {
       profilePicture: null,
     });
   };
-
   //Data Validation
   const validateForm = () => {
     let valid = true;
     const newErrors = { ...errors };
-
+    //First Name
     if (formData.firstName.trim() === "") {
       newErrors.firstName = "Required: First Name";
       valid = false;
     } else {
       newErrors.firstName = "";
     }
-
+    //Last Name
     if (formData.lastName.trim() === "") {
       newErrors.lastName = "Required: Last Name";
       valid = false;
     } else {
       newErrors.lastName = "";
     }
-
+    //Student Id
     if (!/^\d{9}$/.test(formData.studentId)) {
       newErrors.studentId = "Student ID must be 9 digits";
       valid = false;
     } else {
       newErrors.studentId = "";
     }
-
+    //Email
     if (!/^\S+@\S+\.\S+$/.test(formData.emailAddress)) {
       newErrors.emailAddress = "Email address is invalid";
       valid = false;
@@ -71,7 +71,7 @@ export default function UserRegister() {
     } else {
       newErrors.emailAddress = "";
     }
-
+    //Password
     if (formData.password.trim() === "") {
       newErrors.password = "Password is required";
       valid = false;
@@ -81,10 +81,16 @@ export default function UserRegister() {
     } else {
       newErrors.password = "";
     }
+    //Terms and Conditions
+    if (!formData.acceptTerms) {
+      newErrors.acceptTerms = "You must accept the terms and conditions";
+      valid = false;
+    } else {
+      newErrors.acceptTerms = "";
+    }
     setErrors(newErrors);
     return valid;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
@@ -93,7 +99,6 @@ export default function UserRegister() {
       setFormData(clearFormData);
     }
   };
-
   return (
     <div className="flex justify-center items-center h-screen bg-campus-background">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
@@ -151,7 +156,6 @@ export default function UserRegister() {
           />
           <span className="text-campus-accent">{errors.firstName}</span>
         </div>
-
         {/* Student Last Name */}
         <div className="mb-4">
           <label className="block text-campus-text font-noto_serif font-medium mb-2">
@@ -209,7 +213,6 @@ export default function UserRegister() {
           />
           <span className="text-campus-accent">{errors.emailAddress}</span>
         </div>
-
         {/* Student Password */}
         <div className="mb-4">
           <label className="block text-campus-text font-noto_serif font-medium mb-2">
@@ -230,11 +233,30 @@ export default function UserRegister() {
           <span className="text-campus-accent">{errors.password}</span>
         </div>
 
+        {/* Accept Terms and Conditions Checkbox */}
+        <div className="mb-4">
+          <div>
+            <input
+              type="checkbox"
+              name="acceptTerms"
+              checked={formData.acceptTerms}
+              onChange={(e) =>
+                setFormData({ ...formData, acceptTerms: e.target.checked })
+              }
+            />
+            <label className="ml-2 text-campus-text font-noto_serif font-medium">
+              Accept Terms and Conditions
+            </label>
+          </div>
+          <span className="text-campus-accent block mt-2">
+            {errors.acceptTerms}
+          </span>
+        </div>
         {/* Register Button */}
         <div className="text-center">
           <button
             onClick={handleSubmit}
-            className="bg-campus-accent text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent-dark"
+            className="bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent"
           >
             Register
           </button>
