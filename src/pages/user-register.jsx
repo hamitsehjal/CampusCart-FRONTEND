@@ -1,4 +1,5 @@
 // This is the User-Registration of CampusCart
+import Image from "next/image";
 import { useState } from "react";
 
 export default function UserRegister() {
@@ -11,7 +12,6 @@ export default function UserRegister() {
     profilePicture: null,
     acceptTerms: false,
   };
-
   const [formData, setFormData] = useState(clearFormData);
   const [errors, setErrors] = useState({
     firstName: "",
@@ -21,7 +21,6 @@ export default function UserRegister() {
     password: "",
     acceptTerms: "",
   });
-
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -100,11 +99,12 @@ export default function UserRegister() {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen bg-campus-background">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
-          Student Registration
-        </h1>
+    // <div className="flex justify-center items-center h-screen bg-campus-background">
+    <div className=" bg-white p-8  shadow-md">
+      <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
+        Student Registration
+      </h1>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-campus-text font-medium font-noto_serif mb-2">
             Profile Picture
@@ -113,10 +113,12 @@ export default function UserRegister() {
             <div className="mt-5 text-center">
               {/*Display Profile Picture*/}
               <div className="flex justify-center items-center">
-                <img
+                <Image
                   src={URL.createObjectURL(formData.profilePicture)}
                   alt="Profile Preview"
-                  className="h-40 w-40 object-cover rounded-full "
+                  className="object-cover rounded-full "
+                  width={200}
+                  height={200}
                 />
               </div>
               {/*Remove Button*/}
@@ -137,102 +139,103 @@ export default function UserRegister() {
             className="mb-2"
           />
         </div>
-        {/* Student First Name */}
-        <div className="mb-4">
-          <label className="block text-campus-text font-noto_serif font-medium mb-2">
-            First Name
-          </label>
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Kate"
-            className={`border ${
-              errors.firstName ? "border-campus-accent" : "border-black"
-            } rounded-md p-2 w-full`}
-            value={formData.firstName}
-            onChange={(e) =>
-              setFormData({ ...formData, firstName: e.target.value })
-            }
-          />
-          <span className="text-campus-accent">{errors.firstName}</span>
-        </div>
-        {/* Student Last Name */}
-        <div className="mb-4">
-          <label className="block text-campus-text font-noto_serif font-medium mb-2">
-            Last Name
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Smith"
-            className={`border ${
-              errors.lastName ? "border-campus-accent" : "border-black"
-            } rounded-md p-2 w-full`}
-            value={formData.lastName}
-            onChange={(e) =>
-              setFormData({ ...formData, lastName: e.target.value })
-            }
-          />
-          <span className="text-campus-accent">{errors.lastName}</span>
+        {/* Student First And Last Name */}
+        <div className="grid md:grid-cols-2 md:gap-6">
+          <div className="relative z-0 w-full mb-4 group">
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              className="block py-2.5  font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+              placeholder=" "
+              value={formData.firstName}
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
+            />
+            <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              First name*
+            </label>
+            <span className="text-campus-accent text-sm">
+              {errors.firstName}
+            </span>
+          </div>
+          <div className="relative z-0 w-full mb-4 group">
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+              placeholder=" "
+              value={formData.lastName}
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+            />
+            <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+              Last name*
+            </label>
+            <span className="text-campus-accent text-sm">
+              {errors.lastName}
+            </span>
+          </div>
         </div>
         {/* Student Number */}
-        <div className="mb-4">
-          <label className="block text-campus-text font-noto_serif font-medium mb-2">
-            Seneca Student Number
-          </label>
+        <div className="relative z-0 w-full mb-4 group">
           <input
             type="text"
             name="studentId"
-            placeholder="123456789"
-            className={`border ${
-              errors.studentId ? "border-campus-accent" : "border-black"
-            } rounded-md p-2 w-full`}
+            id="studentId"
+            className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+            placeholder=" "
             value={formData.studentId}
             onChange={(e) =>
               setFormData({ ...formData, studentId: e.target.value })
             }
           />
-          <span className="text-campus-accent">{errors.studentId}</span>
+          <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Seneca Student Number*
+          </label>
+          <span className="text-campus-accent text-sm">{errors.studentId}</span>
         </div>
         {/* Student Email */}
-        <div className="mb-4">
-          <label className="block text-campus-text font-noto_serif font-medium mb-2">
-            Email Address
-          </label>
+        <div className="relative z-0 w-full mb-4 group">
           <input
             type="email"
             name="emailAddress"
-            placeholder="katesmith@myseneca.ca"
-            className={`border ${
-              errors.emailAddress ? "border-campus-accent" : "border-black"
-            } rounded-md p-2 w-full`}
+            id="emailAddress"
+            className="block py-2.5  font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+            placeholder=" "
             value={formData.emailAddress}
             onChange={(e) =>
               setFormData({ ...formData, emailAddress: e.target.value })
             }
           />
-          <span className="text-campus-accent">{errors.emailAddress}</span>
+          <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Email Address*
+          </label>
+          <span className="text-campus-accent text-sm">
+            {errors.emailAddress}
+          </span>
         </div>
         {/* Student Password */}
-        <div className="mb-4">
-          <label className="block text-campus-text font-noto_serif font-medium mb-2">
-            Password
-          </label>
+        <div className="relative z-0 w-full mb-4 group">
           <input
             type="password"
             name="password"
-            placeholder="*************"
-            className={`border ${
-              errors.password.length ? "border-campus-accent" : "border-black"
-            } rounded-md p-2 w-full`}
+            id="password"
+            className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+            placeholder=" "
             value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
           />
-          <span className="text-campus-accent">{errors.password}</span>
+          <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+            Password*
+          </label>
+          <span className="text-campus-accent text-sm">{errors.password}</span>
         </div>
-
         {/* Accept Terms and Conditions Checkbox */}
         <div className="mb-4">
           <div>
@@ -245,10 +248,10 @@ export default function UserRegister() {
               }
             />
             <label className="ml-2 text-campus-text font-noto_serif font-medium">
-              Accept Terms and Conditions
+              Accept Terms and Conditions*
             </label>
           </div>
-          <span className="text-campus-accent block mt-2">
+          <span className="text-campus-accent block mt-2 text-sm">
             {errors.acceptTerms}
           </span>
         </div>
@@ -261,7 +264,8 @@ export default function UserRegister() {
             Register
           </button>
         </div>
-      </div>
+      </form>
     </div>
+    // </div>
   );
 }
