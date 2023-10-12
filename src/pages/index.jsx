@@ -13,7 +13,7 @@ export default function Homepage() {
   return (
     
     <><div className="outline-none border-none relative">
-      <div className="absolute left-[30px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[50%] -translate-y-[50%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
+      <div className="absolute left-[20px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[50%] -translate-y-[50%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
         <h1 className="text-campus-accent text-4xl lg:text-[55px] font-bold leading-[1.2] font-cinzel md:text-[40px]">
           Bring the Store to your Doors
         </h1>
@@ -72,7 +72,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Become Partner
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Pick Up Locations
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Reviews
             </div>
           </div>
