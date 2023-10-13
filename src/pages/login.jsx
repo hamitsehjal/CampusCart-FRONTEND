@@ -1,17 +1,18 @@
 // This is the User-Login of CampusCart
 import { useState } from "react";
-
+import { useRouter } from "next/router";
+import { authenticateUser } from "lib/authenticate";
+import Alert from "@/components/alert";
 export default function Login() {
   const clearFormData = {
     email: "",
     password: "",
   };
   const [formData, setFormData] = useState(clearFormData);
-  const [errors, setErrors] = useState({
-    email: "",
-    password: "",
-  });
+  const [errors, setErrors] = useState(clearFormData);
 
+  const router = useRouter();
+  const [warning, setWarning] = useState(null);
   const validateForm = () => {
     let valid = true;
     const newErrors = { ...errors };
@@ -40,12 +41,23 @@ export default function Login() {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      console.log("Succesful Login:", formData);
+    setWarning('')
 
-      setFormData(clearFormData);
+    if (validateForm()) {
+      console.log("Form Validation was successful:", formData);
+      try {
+        await authenticateUser(formData.email, formData.password);
+        setFormData(clearFormData);
+        router.push('/stores');
+      } catch (err) {
+        setWarning(err.message);
+        setFormData(clearFormData);
+
+      }
+    } else {
+      console.log("Form Validation Failed");
     }
   };
   return (
@@ -53,13 +65,12 @@ export default function Login() {
       <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
         Student Log In
       </h1>
+      {warning && <> <Alert message={warning} /><br /><br /></>}
       <form onSubmit={handleSubmit}>
         {/* Student Email */}
         <div className="relative z-0 w-full mb-4 group">
           <input
             type="email"
-            name="email"
-            id="email"
             className="block py-2.5  font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
             placeholder=" "
             value={formData.email}
@@ -78,8 +89,6 @@ export default function Login() {
         <div className="relative z-0 w-full mb-4 group">
           <input
             type="password"
-            name="password"
-            id="password"
             className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
             placeholder=" "
             value={formData.password}
@@ -92,7 +101,7 @@ export default function Login() {
           </label>
           <span className="text-campus-accent text-sm">{errors.password}</span>
         </div>
-        {/* Register Button */}
+        {/* Login Button */}
         <div className="text-center">
           <button className="bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent">
             Login
@@ -100,14 +109,14 @@ export default function Login() {
         </div>
       </form>
       {/* Forgot Password Button */}
-      <div className="text-center mt-4">
+      {/* <div className="text-center mt-4">
         <button
           className="text-campus-blue hover:underline"
         //onClick={() => router.push("#")}  // TO DO: Change route to forgot password page
         >
           Forgot Password?
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
