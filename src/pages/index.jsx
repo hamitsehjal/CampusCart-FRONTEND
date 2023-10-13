@@ -13,11 +13,11 @@ export default function Homepage() {
   return (
     
     <><div className="outline-none border-none relative">
-      <div className="absolute left-[30px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[70%] -translate-y-[70%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
-        <h1 className="text-campus-accent text-4xl lg:text-[70px] font-bold leading-[1.2] font-cinzel">
+      <div className="absolute left-[20px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[50%] -translate-y-[50%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
+        <h1 className="text-campus-accent text-4xl lg:text-[55px] font-bold leading-[1.2] font-cinzel md:text-[40px]">
           Bring the Store to your Doors
         </h1>
-        <h3 className="text-black font-bold text-[24px] lg:text-[48px] leading-[1.2] font-noto_serif">Best Groceries app ever. Pick your desired groceries from the menu.</h3>
+        <h3 className="text-black font-bold text-[24px] lg:text-[44px] leading-[1.2] font-noto_serif md:text-[38px]">Best Groceries app ever. Pick your desired groceries from the menu.</h3>
 
         <div className="bg-campus-accent text-white text-[24px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-campus-secondary">
           Sign Up Now
@@ -72,7 +72,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Become Partner
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Pick Up Locations
             </div>
           </div>
@@ -98,7 +98,7 @@ export default function Homepage() {
                 </div>
               </Link>
             </div>
-            <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
+            <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
                Reviews
             </div>
           </div>
