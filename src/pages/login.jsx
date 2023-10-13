@@ -3,12 +3,12 @@ import { useState } from "react";
 
 export default function Login() {
   const clearFormData = {
-    emailAddress: "",
+    email: "",
     password: "",
   };
   const [formData, setFormData] = useState(clearFormData);
   const [errors, setErrors] = useState({
-    emailAddress: "",
+    email: "",
     password: "",
   });
 
@@ -17,15 +17,15 @@ export default function Login() {
     const newErrors = { ...errors };
 
     //Email
-    if (!/^\S+@\S+\.\S+$/.test(formData.emailAddress)) {
-      newErrors.emailAddress = "Email address is invalid";
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Email address is invalid";
       valid = false;
-    } else if (!formData.emailAddress.endsWith("@myseneca.ca")) {
-      newErrors.emailAddress =
+    } else if (!formData.email.endsWith("@myseneca.ca")) {
+      newErrors.email =
         "Please Provide Your Seneca Email (@myseneca.ca)";
       valid = false;
     } else {
-      newErrors.emailAddress = "";
+      newErrors.email = "";
     }
 
     //Password
@@ -58,20 +58,20 @@ export default function Login() {
         <div className="relative z-0 w-full mb-4 group">
           <input
             type="email"
-            name="emailAddress"
-            id="emailAddress"
+            name="email"
+            id="email"
             className="block py-2.5  font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
             placeholder=" "
-            value={formData.emailAddress}
+            value={formData.email}
             onChange={(e) =>
-              setFormData({ ...formData, emailAddress: e.target.value })
+              setFormData({ ...formData, email: e.target.value })
             }
           />
           <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
             Email Address*
           </label>
           <span className="text-campus-accent text-sm">
-            {errors.emailAddress}
+            {errors.email}
           </span>
         </div>
         {/* Student Password */}
@@ -103,7 +103,7 @@ export default function Login() {
       <div className="text-center mt-4">
         <button
           className="text-campus-blue hover:underline"
-          //onClick={() => router.push("#")}  // TO DO: Change route to forgot password page
+        //onClick={() => router.push("#")}  // TO DO: Change route to forgot password page
         >
           Forgot Password?
         </button>
