@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
  * 2. Store the JWT token locally if status code of above request's response is 200
  * 3. If status code is not 200, throw an error with the error message from the API
  */
-async function authenticateUser(user, password) {
+export async function authenticateUser(user, password) {
     const res = await fetch(`http://localhost:8080/login`, {
         method: 'POST',
         headers: {
@@ -21,7 +21,11 @@ async function authenticateUser(user, password) {
         return true;
     }
     else {
-        throw new Error(data.message);
+        /**
+         * Our Error object from server has this structure:
+         * https://github.com/hamitsehjal/CampusCart-BACKEND/blob/main/src/response.js#L35C7-L35C8
+         */
+        throw new Error(data.error.message);
     }
 }
 
