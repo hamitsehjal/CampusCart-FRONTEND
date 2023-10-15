@@ -28,7 +28,7 @@ export const Hero = () => {
                             Best Groceries app ever. Pick your desired groceries from the menu.
                         </p>
                         <div className='flex space-x-5'>
-                            <Link href='../user-register' className='bg-green-600 text-white rounded-lg py-4 px-5'>
+                            <Link href='../user-register' className='bg-green-600 text-white rounded-lg py-4 px-5 duration-300 transition-all ease-in-out hover:bg-blue-500 hover:shadow-lg inline-block relative top-0 hover:-top-1'>
                                 Sign Up Now
                             </Link>
                         </div>
