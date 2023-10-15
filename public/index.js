@@ -23,4 +23,6 @@ export const CategoriesImages = {
 export const HomePageImage = {
   grocery1: "/images/homePage/1_bg.png",
   grocery2: "/images/homePage/2-bg.png",
+  rightTick: "/images/homePage/right_symbol.png",
+  groceryBag: "/images/homePage/g-bag.png",
 };
