@@ -21,5 +21,6 @@ export const CategoriesImages = {
 };
 
 export const HomePageImage = {
-  grocery1: "/images/homePage/grocery-cart.jpg",
+  grocery1: "/images/homePage/1_bg.png",
+  grocery2: "/images/homePage/2-bg.png",
 };
