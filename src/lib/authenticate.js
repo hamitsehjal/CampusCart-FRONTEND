@@ -12,7 +12,8 @@ export async function registerUser(userData) {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...userData }),
+        // userData is a FormData object so no need to JSON.stringify
+        body: userData,
     });
 
     const data = await res.json();
