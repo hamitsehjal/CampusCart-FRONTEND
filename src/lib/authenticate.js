@@ -9,9 +9,6 @@ import jwt_decode from 'jwt-decode';
 export async function registerUser(userData) {
     const res = await fetch(`http://localhost:8080/register`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         // userData is a FormData object so no need to JSON.stringify
         body: userData,
     });
