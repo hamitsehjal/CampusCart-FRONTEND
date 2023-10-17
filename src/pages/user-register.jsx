@@ -145,8 +145,8 @@ export default function UserRegister() {
                   src={URL.createObjectURL(formData.profile)}
                   alt="Profile Preview"
                   className="object-cover rounded-full "
-                  width={150}
-                  height={1500}
+                  width={200}
+                  height={200}
                 />
               </div>
               {/*Remove Button*/}
