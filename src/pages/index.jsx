@@ -11,7 +11,7 @@ import { VscFeedback } from 'react-icons/vsc'
 
 export default function Homepage() {
   return (
-    
+
     <><div className="outline-none border-none relative">
       <div className="absolute left-[20px] md:left-[70px] max-w-[250px] sm:max-w-[550px] top-[50%] -translate-y-[50%] space-y-2 lg:space-y-4 bg-[#ffffffa5] sm:bg-transparent p-4 sm:p-0 rounded-lg ">
         <h1 className="text-campus-accent text-4xl lg:text-[55px] font-bold leading-[1.2] font-cinzel md:text-[40px]">
@@ -31,34 +31,34 @@ export default function Homepage() {
         width={2000}
         height={2000} />
     </div>
-    
-    <div className="mx-auto py-10 flex-row">
+
+      <div className="mx-auto py-10 flex-row">
         <p className=" text-3xl lg:text-5xl font-cinzel font-semibold text-campus-text text-center mt-3">
           Top Stores
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 py-20 px-10">
           <div className="flex flex-col gap-5 items-center py-4">
-            <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <Image src={StoreImages.SevenEleven} alt="v1" width={100} height={100} className='hover:cursor-pointer' />
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               7 Eleven
+              7 Eleven
             </div>
           </div>
           <div className="flex flex-col gap-5 items-center py-4">
-            <Image src={StoreImages.Costco} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <Image src={StoreImages.Costco} alt="v1" width={100} height={100} className='hover:cursor-pointer' />
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Costco
+              Costco
             </div>
           </div>
           <div className="flex flex-col gap-5 items-center py-4">
-            <Image src={StoreImages.DollarTree} alt="v1" width={100} height={100} className='hover:cursor-pointer'/>
+            <Image src={StoreImages.DollarTree} alt="v1" width={100} height={100} className='hover:cursor-pointer' />
             <div className="text-3xl font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Dollar Tree
-            </div>           
+              Dollar Tree
+            </div>
           </div>
         </div>
       </div>
 
-    <div className="mx-auto py-10 flex-row">
+      <div className="mx-auto py-10 flex-row">
         <div className=" text-3xl lg:text-5xl font-cinzel font-semibold text-campus-text text-center mt-3">
           Things to Know
         </div>
@@ -66,45 +66,45 @@ export default function Homepage() {
           {/* Become A Partner */}
           <div className="flex flex-col gap-5 items-center py-4">
             <div>
-              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>
                 <div>
                   <RiStore3Fill className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
                 </div>
               </Link>
             </div>
             <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Become Partner
+              Become Partner
             </div>
           </div>
           {/* Pick Up Location*/}
           <div className="flex flex-col gap-5 items-center py-4">
             <div>
-              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>
                 <div>
                   <FaMapLocationDot className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
                 </div>
               </Link>
             </div>
             <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Pick Up Locations
+              Pick Up Locations
             </div>
           </div>
           {/* Review */}
           <div className="flex flex-col gap-5 items-center py-4">
             <div>
-              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>                        
+              <Link className="flex flex-row gap-x-2 items-center justify-start text-2xl hover:cursor-pointer" href=''>
                 <div>
                   <VscFeedback className="h-20  md:h-20 lg:h-20 w-20 md:w-20 lg:w-20 text-campus-secondary" />
                 </div>
               </Link>
             </div>
             <div className="text-3xl text-center font-bold text-campus-text  border-black rounded-xl hover:cursor-pointer">
-               Reviews
+              Reviews
             </div>
           </div>
         </div>
       </div>
-      </>    
+    </>
   );
 }
 
