@@ -1,7 +1,9 @@
 // This is the User-Registration of CampusCart
+import { registerUser } from "lib/authenticate";
 import Image from "next/image";
 import { useState } from "react";
-
+import { useRouter } from "next/router";
+import Alert from "@/components/alert";
 export default function UserRegister() {
   const clearFormData = {
     firstName: "",
@@ -21,6 +23,9 @@ export default function UserRegister() {
     password: "",
     acceptTerms: "",
   });
+
+  const router = useRouter();
+  const [warning, setWarning] = useState(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({
@@ -90,20 +95,28 @@ export default function UserRegister() {
     setErrors(newErrors);
     return valid;
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setWarning('');
       console.log("Form submitted:", formData);
+      try {
+        await registerUser(formData);
+        setFormData(clearFormData);
+        router.push('/login');
+      } catch (err) {
+        setWarning(err.message);
+        setFormData(clearFormData);
+      }
       //Clear input fields after submitting form
-      setFormData(clearFormData);
     }
   };
   return (
-    // <div className="flex justify-center items-center h-screen bg-campus-background">
     <div className=" bg-white p-8  shadow-md">
       <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
         Student Registration
       </h1>
+      {warning && <><Alert message={warning} /><br /><br /></>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-campus-text font-medium font-noto_serif mb-2">
@@ -266,6 +279,5 @@ export default function UserRegister() {
         </div>
       </form>
     </div>
-    // </div>
   );
 }
