@@ -1,15 +1,17 @@
 // This is the User-Registration of CampusCart
+import { registerUser } from "lib/authenticate";
 import Image from "next/image";
 import { useState } from "react";
-
+import { useRouter } from "next/router";
+import Alert from "@/components/alert";
 export default function UserRegister() {
   const clearFormData = {
     firstName: "",
     lastName: "",
     studentId: "",
-    emailAddress: "",
+    email: "",
     password: "",
-    profilePicture: null,
+    profile: null,
     acceptTerms: false,
   };
   const [formData, setFormData] = useState(clearFormData);
@@ -17,23 +19,28 @@ export default function UserRegister() {
     firstName: "",
     lastName: "",
     studentId: "",
-    emailAddress: "",
+    email: "",
     password: "",
     acceptTerms: "",
   });
+
+  const router = useRouter();
+  const [warning, setWarning] = useState(null);
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setFormData({
       ...formData,
-      profilePicture: file,
+      profile: file,
     });
   };
-  const removeProfilePicture = () => {
+  const removeProfile = () => {
     setFormData({
       ...formData,
-      profilePicture: null,
+      profile: null,
     });
   };
+
   //Data Validation
   const validateForm = () => {
     let valid = true;
@@ -60,15 +67,15 @@ export default function UserRegister() {
       newErrors.studentId = "";
     }
     //Email
-    if (!/^\S+@\S+\.\S+$/.test(formData.emailAddress)) {
-      newErrors.emailAddress = "Email address is invalid";
+    if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Email address is invalid";
       valid = false;
-    } else if (!formData.emailAddress.endsWith("@myseneca.ca")) {
-      newErrors.emailAddress =
+    } else if (!formData.email.endsWith("@myseneca.ca")) {
+      newErrors.email =
         "Please Provide Your Seneca Email (@myseneca.ca)";
       valid = false;
     } else {
-      newErrors.emailAddress = "";
+      newErrors.email = "";
     }
     //Password
     if (formData.password.trim() === "") {
@@ -90,31 +97,52 @@ export default function UserRegister() {
     setErrors(newErrors);
     return valid;
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
+      setWarning('');
       console.log("Form submitted:", formData);
+      try {
+        let form = new FormData()
+        for (const key in formData) {
+          if (formData.hasOwnProperty(key)) {
+            if (key === 'acceptTerms') {
+              // Handle boolean properties, convert to 'true' or 'false'
+              form.append(key, formData[key] ? 'true' : 'false');
+            }
+            else {
+              form.append(key, formData[key]);
+            }
+          }
+        }
+        await registerUser(form);
+        setFormData(clearFormData);
+        router.push('/login');
+      } catch (err) {
+        setWarning(err.message);
+        setFormData(clearFormData);
+      }
       //Clear input fields after submitting form
-      setFormData(clearFormData);
     }
   };
   return (
-    // <div className="flex justify-center items-center h-screen bg-campus-background">
     <div className=" bg-white p-8  shadow-md">
       <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
         Student Registration
       </h1>
+      {warning && <><Alert message={warning} /><br /><br /></>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-campus-text font-medium font-noto_serif mb-2">
             Profile Picture
           </label>
-          {formData.profilePicture && (
+          {formData.profile && (
             <div className="mt-5 text-center">
               {/*Display Profile Picture*/}
               <div className="flex justify-center items-center">
                 <Image
-                  src={URL.createObjectURL(formData.profilePicture)}
+                  src={URL.createObjectURL(formData.profile)}
                   alt="Profile Preview"
                   className="object-cover rounded-full "
                   width={200}
@@ -123,7 +151,7 @@ export default function UserRegister() {
               </div>
               {/*Remove Button*/}
               <button
-                onClick={removeProfilePicture}
+                onClick={removeProfile}
                 className="text-sm font-noto_serif text-white bg-campus-red hover:bg-campus-accent py-1 px-2 mt-2 mb-2 rounded-md cursor-pointer"
               >
                 Remove
@@ -133,7 +161,7 @@ export default function UserRegister() {
           {/*Upload Profile Picture*/}
           <input
             type="file"
-            name="profilePicture"
+            name="profile"
             accept="image/*"
             onChange={handleImageChange}
             className="mb-2"
@@ -202,20 +230,20 @@ export default function UserRegister() {
         <div className="relative z-0 w-full mb-4 group">
           <input
             type="email"
-            name="emailAddress"
-            id="emailAddress"
+            name="email"
+            id="email"
             className="block py-2.5  font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
             placeholder=" "
-            value={formData.emailAddress}
+            value={formData.email}
             onChange={(e) =>
-              setFormData({ ...formData, emailAddress: e.target.value })
+              setFormData({ ...formData, email: e.target.value })
             }
           />
           <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
             Email Address*
           </label>
           <span className="text-campus-accent text-sm">
-            {errors.emailAddress}
+            {errors.email}
           </span>
         </div>
         {/* Student Password */}
@@ -266,6 +294,5 @@ export default function UserRegister() {
         </div>
       </form>
     </div>
-    // </div>
   );
 }
