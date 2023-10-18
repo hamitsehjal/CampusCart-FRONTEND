@@ -8,12 +8,22 @@ import {
   RiBodyScanLine,
 } from "react-icons/ri";
 import Link from "next/link";
+
+import { readToken, removeToken } from "lib/authenticate";
+import { useRouter } from "next/router";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const token = readToken();
+
+  function logout() {
+    removeToken();
+    router.push('/');
+  }
   return (
     <nav className="bg-campus-red flex flex-col">
       <div className="flex flex-row justify-between p-4 md:p-2  text-campus-background">
@@ -46,18 +56,26 @@ export default function Navbar() {
         {/* Log In 
             Sign Up  */}
         <div className="hidden lg:flex flex-row gap-x-4 items-center justify-end text-xl">
-          <Link
-            className="px-4 py-2 font-noto_serif text-sm bg-campus-text text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
-            href="/login"
-          >
-            Login
-          </Link>
-          <Link
+          {!token &&
+            <Link
+              className="px-4 py-2 font-noto_serif text-sm bg-campus-text text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
+              href="/login"
+            >
+              Login
+            </Link>}
+          {!token && <Link
             className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
             href="/user-register"
           >
             Sign Up
-          </Link>
+          </Link>}
+          {token && <Link
+            className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
+            onClick={logout}
+            href="/"
+          >
+            Log out
+          </Link>}
         </div>
         {/* Mobile navigation */}
         <div className="lg:hidden flex flex-col items-center justify-center text-xl">
@@ -81,17 +99,26 @@ export default function Navbar() {
           </div>
           {/* Buttons */}
           <div className="flex flex-col gap-2 justify-end p-2">
-            <Link className="flex flex-row gap-2 items-center" href="/login">
+            {!token && <Link className="flex flex-row gap-2 items-center" href="/login">
               <RiLoginBoxLine className="h-6 w-6" />
               <span className="text-sm">Login</span>
-            </Link>
-            <Link
+            </Link>}
+            {!token && <Link
               className="flex flex-row gap-2 items-center"
               href="/user-register"
             >
               <RiBodyScanLine className="h-6 w-6" />
               <span className="text-sm">Sign Up</span>
-            </Link>
+            </Link>}
+            {token && <Link
+              className="flex flex-row gap-2 items-center"
+              onClick={logout}
+              href="/"
+
+            >
+              <RiLoginBoxLine className="h-6 w-6" />
+              <span className="text-sm">Log out</span>
+            </Link>}
           </div>
         </div>
       )}
