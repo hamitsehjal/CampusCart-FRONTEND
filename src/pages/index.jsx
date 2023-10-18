@@ -1,5 +1,7 @@
 // This is the Homepage of CampusCart
-import { Home } from './Home/Home';
+
+import { Home } from "@/components/Home/Home";
+
 
 
 
