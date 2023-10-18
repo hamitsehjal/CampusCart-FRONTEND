@@ -1,10 +1,10 @@
 import Footer from "./footer";
 import Navbar from "./navbar";
 // This is the Shared Layout of CampusCart
-export default function Layout({ children }) {
+export default function Layout(props) {
     return (<div>
         <Navbar />
-        {children}
+        {props.children}
         <Footer />
     </div>)
 }
