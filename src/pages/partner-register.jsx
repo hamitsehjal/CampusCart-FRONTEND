@@ -1,24 +1,26 @@
 // This is the Partner-Registration of CampusCart
 
-//import { registerUser } from "lib/authenticate";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Alert from "@/components/alert";
 import { PartnerRegisterImage } from "../../public";
-
+import { registerPartner } from "lib/authenticate";
 export default function PartnerRegister() {
   const clearFormData = {
     storeName: "",
     storeEmail: "",
-    addressLine1: "",
-    addressLine2: "",
-    postalCode: "",
-    city: "",
-    state: "",
-    country: "",
+    address: {
+      addressLine1: "",
+      addressLine2: "",
+      postalCode: "",
+      city: "",
+      state: "",
+      country: "",
+    },
     storeDescription: "",
     contactFirstName: "",
     contactLastName: "",
+    acceptTerms: false,
   };
 
   const [formData, setFormData] = useState(clearFormData);
@@ -26,15 +28,18 @@ export default function PartnerRegister() {
   const [errors, setErrors] = useState({
     storeName: "",
     storeEmail: "",
-    addressLine1: "",
-    addressLine2: "",
-    postalCode: "",
-    city: "",
-    state: "",
-    country: "",
+    address: {
+      addressLine1: "",
+      addressLine2: "",
+      postalCode: "",
+      city: "",
+      state: "",
+      country: "",
+    },
     storeDescription: "",
     contactFirstName: "",
     contactLastName: "",
+    acceptTerms: "",
   });
 
   const router = useRouter();
@@ -73,43 +78,44 @@ export default function PartnerRegister() {
       newErrors.storeEmail = "";
     }
 
-    if (formData.addressLine1.trim() === "") {
-      newErrors.addressLine1 = "Required: Address Line 1";
+    // store address 
+    if (formData.address.addressLine1.trim() === "") {
+      newErrors.address.addressLine1 = "Required: Address Line 1";
       valid = false;
     } else {
-      newErrors.addressLine1 = "";
+      newErrors.address.addressLine1 = "";
     }
 
-    if (formData.addressLine2.trim() === "") {
-      newErrors.addressLine2 = ""; 
+    if (formData.address.addressLine2.trim() === "") {
+      newErrors.address.addressLine2 = "";
     }
 
-    if (formData.postalCode.trim() === "") {
-      newErrors.postalCode = "Required: Postal Code";
+    if (formData.address.postalCode.trim() === "") {
+      newErrors.address.postalCode = "Required: Postal Code";
       valid = false;
     } else {
-      newErrors.postalCode = "";
+      newErrors.address.postalCode = "";
     }
 
-    if (formData.city.trim() === "") {
-      newErrors.city = "Required: City";
+    if (formData.address.city.trim() === "") {
+      newErrors.address.city = "Required: City";
       valid = false;
     } else {
-      newErrors.city = "";
+      newErrors.address.city = "";
     }
 
-    if (formData.state.trim() === "") {
-      newErrors.state = "Required: State";
+    if (formData.address.state.trim() === "") {
+      newErrors.address.state = "Required: State";
       valid = false;
     } else {
-      newErrors.state = "";
+      newErrors.address.state = "";
     }
 
-    if (formData.country.trim() === "") {
-      newErrors.country = "Required: Country";
+    if (formData.address.country.trim() === "") {
+      newErrors.address.country = "Required: Country";
       valid = false;
     } else {
-      newErrors.country = "";
+      newErrors.address.country = "";
     }
 
     if (formData.storeDescription.trim() === "") {
@@ -118,25 +124,25 @@ export default function PartnerRegister() {
     } else {
       newErrors.storeDescription = "";
     }
-//Terms and Conditions
-if (!formData.acceptTerms) {
-    newErrors.acceptTerms = "You must accept the terms and conditions";
-    valid = false;
-  } else {
-    newErrors.acceptTerms = "";
-  }
+    //Terms and Conditions
+    if (!formData.acceptTerms) {
+      newErrors.acceptTerms = "You must accept the terms and conditions";
+      valid = false;
+    } else {
+      newErrors.acceptTerms = "";
+    }
     setErrors(newErrors);
     return valid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setWarning("");
     if (validateForm()) {
-      setWarning("");
       console.log("Form submitted:", formData);
       try {
         // Handle form submission and routing here
-
+        await registerPartner(formData);
         setFormData(clearFormData);
         router.push("/confirm-partner");
       } catch (err) {
@@ -147,25 +153,25 @@ if (!formData.acceptTerms) {
   };
   return (
     <div className="min-h-screen flex items-center justify-center shadow-lg dark:bg-neutral-100" style={{
-        borderRadius: "10px",
-      }}>
-       <div
-          className="w-full sm:w-1/2 md:w-1/2 p-8 rounded-b-lg lg:w-6/12 lg:rounded-l-lg lg:rounded-br-none"
-          style={{
-          backgroundImage: `url(${PartnerRegisterImage.formbackground})`,
-          marginBottom: "20px",
-          marginTop: "20px",
-          backgroundSize: "cover",
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "90px",
-          minHeight: "115vh", 
-          maxHeight: "115vh",
-          alignItems: "center", 
-          justifyContent: "center",
-        }}
+      borderRadius: "10px",
+    }}>
+      <div
+        className="w-full sm:w-1/2 md:w-1/2 p-8 rounded-b-lg lg:w-6/12 lg:rounded-l-lg lg:rounded-br-none"
+      // style={{
+      //   backgroundImage: `url(${PartnerRegisterImage.formbackground})`,
+      //   marginBottom: "20px",
+      //   marginTop: "20px",
+      //   backgroundSize: "cover",
+      //   display: "flex",
+      //   flexDirection: "column",
+      //   marginLeft: "90px",
+      //   minHeight: "115vh",
+      //   maxHeight: "115vh",
+      //   alignItems: "center",
+      //   justifyContent: "center",
+      // }}
       >
-        
+
         <h1 className="text-lg text-campus-text font-cinzel mb-6 rounded-lg text-center">
           Partner Registration
         </h1>
@@ -260,53 +266,59 @@ if (!formData.acceptTerms) {
           </div>
           {/* Address Line 1 */}
           <div className="grid md:grid-cols-2 md:gap-6">
-  {/* Left side */}
-  <div className="relative z-0 w-full mb-4 group">
-    <input
-      type="text"
-      name="addressLine1"
-      id="addressLine1"
-      className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
-      placeholder=" "
-      value={formData.addressLine1}
-      onChange={(e) =>
-        setFormData({
-          ...formData,
-          addressLine1: e.target.value,
-        })
-      }
-    />
-    <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-      Address Line 1*
-    </label>
-    <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-      {errors.addressLine1}
-    </span>
-  </div>
+            {/* Left side */}
+            <div className="relative z-0 w-full mb-4 group">
+              <input
+                type="text"
+                name="addressLine1"
+                id="addressLine1"
+                className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+                placeholder=" "
+                value={formData.address.addressLine1}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    address: {
+                      ...formData.address,
+                      addressLine1: e.target.value,
+                    }
+                  })
+                }
+              />
+              <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Address Line 1*
+              </label>
+              <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
+                {errors.address.addressLine1}
+              </span>
+            </div>
 
-  {/* Right side */}
-  <div className="relative z-0 w-full mb-4 group">
-    <input
-      type="text"
-      name="addressLine2"
-      id="addressLine2"
-      className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
-      placeholder=" "
-      value={formData.addressLine2}
-      onChange={(e) =>
-        setFormData({
-          ...formData,
-          addressLine2: e.target.value,
-        })
-      }
-    />
-    <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-      Address Line 2 (optional)
-    </label>
-    <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-      {errors.addressLine2}
-    </span>
-  </div>
+            {/* Right side */}
+            <div className="relative z-0 w-full mb-4 group">
+              <input
+                type="text"
+                name="addressLine2"
+                id="addressLine2"
+                className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
+                placeholder=" "
+                value={formData.address.addressLine2}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    address: {
+                      ...formData.address,
+                      addressLine2: e.target.value,
+                    }
+                  })
+                }
+              />
+              <label className="peer-focus:font-medium font-noto_serif absolute text-sm text-campus-blue duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-campus-blue peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                Address Line 2 (optional)
+              </label>
+              <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
+                {errors.address.addressLine2}
+              </span>
+            </div>
             {/* Left side */}
             <div className="relative z-0 w-full mb-4 group">
               <input
@@ -315,11 +327,14 @@ if (!formData.acceptTerms) {
                 id="postalCode"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.postalCode}
+                value={formData.address.postalCode}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    postalCode: e.target.value,
+                    address: {
+                      ...formData.address,
+                      postalCode: e.target.value,
+                    }
                   })
                 }
               />
@@ -327,7 +342,7 @@ if (!formData.acceptTerms) {
                 Postal Code*
               </label>
               <span className="text-campus-accent text-sm">
-                {errors.postalCode}
+                {errors.address.postalCode}
               </span>
             </div>
             <div className="relative z-0 w-full mb-4 group">
@@ -337,11 +352,14 @@ if (!formData.acceptTerms) {
                 id="city"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.city}
+                value={formData.address.city}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    city: e.target.value,
+                    address: {
+                      ...formData.address,
+                      city: e.target.value,
+                    }
                   })
                 }
               />
@@ -349,7 +367,7 @@ if (!formData.acceptTerms) {
                 City*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.city}
+                {errors.address.city}
               </span>
             </div>
             {/* Right side */}
@@ -360,11 +378,14 @@ if (!formData.acceptTerms) {
                 id="state"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.state}
+                value={formData.address.state}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    state: e.target.value,
+                    address: {
+                      ...formData.address,
+                      state: e.target.value,
+                    }
                   })
                 }
               />
@@ -372,7 +393,7 @@ if (!formData.acceptTerms) {
                 State*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.state}
+                {errors.address.state}
               </span>
             </div>
             <div className="relative z-0 w-full mb-4 group">
@@ -382,11 +403,14 @@ if (!formData.acceptTerms) {
                 id="country"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.country}
+                value={formData.address.country}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    country: e.target.value,
+                    address: {
+                      ...formData.address,
+                      country: e.target.value,
+                    }
                   })
                 }
               />
@@ -394,7 +418,7 @@ if (!formData.acceptTerms) {
                 Country*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.country}
+                {errors.address.country}
               </span>
             </div>
           </div>
@@ -455,7 +479,7 @@ if (!formData.acceptTerms) {
         style={{
           backgroundImage: `url(${PartnerRegisterImage.grocerybackground})`,
           minHeight: "115vh",
-          height: "100%", 
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           marginRight: "90px",

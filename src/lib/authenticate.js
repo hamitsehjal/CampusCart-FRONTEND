@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
  * 
  */
 export async function registerUser(userData) {
-    const res = await fetch(`http://localhost:8080/register`, {
+    const res = await fetch(`http://localhost:8080/register-user`, {
         method: 'POST',
         // userData is a FormData object so no need to JSON.stringify
         body: userData,
@@ -22,6 +22,33 @@ export async function registerUser(userData) {
          * Our Error object from server has this structure:
          * https://github.com/hamitsehjal/CampusCart-BACKEND/blob/main/src/response.js#L35C7-L35C8
          */
+        throw new Error(data.error.message);
+    }
+}
+
+/**
+ * Given the partner information, make a request to our server with api endpoint(partner-register)
+ * If status code is 201, return true 
+ * Otherwise, throw an error with the API's error message 
+ */
+export async function registerPartner(formData) {
+    const res = await fetch(`http://localhost:8080/register-partner`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (res.status == 201) {
+        return true;
+    } else {
+        /**
+      * Our Error object from server has this structure:
+      * https://github.com/hamitsehjal/CampusCart-BACKEND/blob/main/src/response.js#L35C7-L35C8
+      */
         throw new Error(data.error.message);
     }
 }
