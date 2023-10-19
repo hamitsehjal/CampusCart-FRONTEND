@@ -1,0 +1,137 @@
+/* Product Card Container */
+.productCard {
+  background-color: #D9D9D9;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow size */
+  display: flex;
+  flex-direction: column;
+  margin: 16px;
+  width: 100%;
+  max-width: 300px;
+  transition: box-shadow 0.3s ease;
+  position: relative; /* Added position relative */
+  /* flex-grow: 1; Added to allow the card to expand individually */
+
+}
+
+.productCard:hover {
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Image */
+.productImage {
+  overflow: hidden;
+  position: relative;
+  padding-top: 66.66%; /* 3:2 Aspect Ratio (for 300x200 images) */
+}
+
+.productImage img {
+  object-fit: cover;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+/* Product Details */
+.productDetails {
+  padding: 16px;
+}
+
+.productName {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.productDescription {
+  font-size: 0.875rem;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+.productPrice {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 16px;
+}
+
+/* Add to Cart Button */
+.addToCartButton {
+  background-color: #007BFF;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 8px 16px;
+  transition: background-color 0.3s ease;
+  position: relative; /* Added position relative */
+}
+
+/* Product Grid Container */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns for lg:grid */
+  grid-gap: 16px;
+  justify-content: center; /* Center the grid in the parent container */
+  /* background-image: url('your-image.jpg');
+  background-size: cover; /* Makes the image cover the container 
+  background-repeat: no-repeat; */
+}
+
+/* Product Icon */
+.productIcon {
+  position: absolute;
+  top: -15px; /* Adjusted to move the icon 15 pixels higher */
+  right: -15px; /* Adjusted to move the icon 15 pixels to the right */
+  width: 80px; /* Increased width to extend the icon outside */
+  height: 56px; /* Increased height to extend the icon outside */
+  fill: #fff; /* Set the fill color for the icon */
+}
+
+.productIcon:hover {
+  /* fill: #3d16be; */
+  /* background-color: #0056b3; */
+  width: 85px; /* Increased width to extend the icon outside */
+/*  height: 100px;  /*Increased height to extend the icon outside */
+
+}
+
+.addToCartButton:hover {
+  background-color: #0056b3;
+}
+
+/* Background class */
+.backgroundImage {
+  background-image: url('../public/background_img.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* Add other background styles if needed */
+}
+
+/* Expanded Product Card */
+.expanded {
+  width: 1000%;
+  /* max-width: 100%; */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Details Container */
+.productDetailsContainer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in;
+  margin-top: 16px;
+}
+
+.productCard.expanded .productDetailsContainer {
+  max-height: 10000px; /* Adjust this value according to your content */
+  transition: max-height 0.5s ease-out;
+}
