@@ -86,7 +86,7 @@ export default function PartnerRegister() {
     }
 
     if (formData.address.addressLine2.trim() === "") {
-      newErrors.addressLine2 = "";
+      newErrors.address.addressLine2 = "";
     }
 
     if (formData.address.postalCode.trim() === "") {
@@ -273,11 +273,14 @@ export default function PartnerRegister() {
                 id="addressLine1"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.addressLine1}
+                value={formData.address.addressLine1}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    addressLine1: e.target.value,
+                    address: {
+                      ...formData.address,
+                      addressLine1: e.target.value,
+                    }
                   })
                 }
               />
@@ -285,7 +288,7 @@ export default function PartnerRegister() {
                 Address Line 1*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.addressLine1}
+                {errors.address.addressLine1}
               </span>
             </div>
 
@@ -297,11 +300,14 @@ export default function PartnerRegister() {
                 id="addressLine2"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.addressLine2}
+                value={formData.address.addressLine2}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    addressLine2: e.target.value,
+                    address: {
+                      ...formData.address,
+                      addressLine2: e.target.value,
+                    }
                   })
                 }
               />
@@ -309,7 +315,7 @@ export default function PartnerRegister() {
                 Address Line 2 (optional)
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.addressLine2}
+                {errors.address.addressLine2}
               </span>
             </div>
             {/* Left side */}
@@ -320,11 +326,14 @@ export default function PartnerRegister() {
                 id="postalCode"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.postalCode}
+                value={formData.address.postalCode}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    postalCode: e.target.value,
+                    address: {
+                      ...formData.address,
+                      postalCode: e.target.value,
+                    }
                   })
                 }
               />
@@ -332,7 +341,7 @@ export default function PartnerRegister() {
                 Postal Code*
               </label>
               <span className="text-campus-accent text-sm">
-                {errors.postalCode}
+                {errors.address.postalCode}
               </span>
             </div>
             <div className="relative z-0 w-full mb-4 group">
@@ -342,11 +351,14 @@ export default function PartnerRegister() {
                 id="city"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.city}
+                value={formData.address.city}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    city: e.target.value,
+                    address: {
+                      ...formData.address,
+                      city: e.target.value,
+                    }
                   })
                 }
               />
@@ -354,7 +366,7 @@ export default function PartnerRegister() {
                 City*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.city}
+                {errors.address.city}
               </span>
             </div>
             {/* Right side */}
@@ -365,11 +377,14 @@ export default function PartnerRegister() {
                 id="state"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.state}
+                value={formData.address.state}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    state: e.target.value,
+                    address: {
+                      ...formData.address,
+                      state: e.target.value,
+                    }
                   })
                 }
               />
@@ -377,7 +392,7 @@ export default function PartnerRegister() {
                 State*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.state}
+                {errors.address.state}
               </span>
             </div>
             <div className="relative z-0 w-full mb-4 group">
@@ -387,11 +402,14 @@ export default function PartnerRegister() {
                 id="country"
                 className="block py-2.5 font-noto_serif px-0 w-full text-sm text-campus-text bg-transparent border-0 border-b-2 border-campus-blue appearance-none focus:outline-none focus:ring-0 focus:border-campus-secondary peer"
                 placeholder=" "
-                value={formData.country}
+                value={formData.address.country}
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    country: e.target.value,
+                    address: {
+                      ...formData.address,
+                      country: e.target.value,
+                    }
                   })
                 }
               />
@@ -399,7 +417,7 @@ export default function PartnerRegister() {
                 Country*
               </label>
               <span style={{ fontSize: '11px' }} className="text-campus-accent text-sm">
-                {errors.country}
+                {errors.address.country}
               </span>
             </div>
           </div>
