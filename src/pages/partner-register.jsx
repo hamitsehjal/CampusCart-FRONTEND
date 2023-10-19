@@ -147,7 +147,6 @@ if (!formData.acceptTerms) {
   };
   return (
     <div className="min-h-screen flex items-center justify-center" style={{
-        
         marginBottom: "40px",
         marginTop:"40px",
       }}>

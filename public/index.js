@@ -38,3 +38,8 @@ export const PartnerRegisterImage = {
   grocerybackground: "/images/partnerRegister/grc-background.png",
   formbackground: "/images/partnerRegister/form-background.png",
 }
+
+export const LoginImage = {
+  loginImage: "/images/login/loginImage.png",
+  loginImageForm: "/images/login/login-img1.png",
+}
