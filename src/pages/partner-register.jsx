@@ -163,6 +163,7 @@ if (!formData.acceptTerms) {
           maxHeight: "115vh",
         }}
       >
+        
         <h1 className="text-lg text-campus-text font-cinzel mb-6 rounded-lg text-center">
           Partner Registration
         </h1>

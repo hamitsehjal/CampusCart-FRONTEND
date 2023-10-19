@@ -43,3 +43,8 @@ export const LoginImage = {
   loginImage: "/images/login/loginImage.png",
   loginImageForm: "/images/login/login-img1.png",
 }
+
+export const UserRegisterImage = {
+  userRegisterGif: "/images/userRegister/userRegisterImage.gif",
+  registerImageForm: "/images/userRegister/formImage.png",
+}
