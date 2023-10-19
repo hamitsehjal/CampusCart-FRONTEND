@@ -1,9 +1,9 @@
 // // App.js
 
 import React, { useState } from 'react';
-import Header from '../components/navbar';
-import Footer from '../components/Footer';
-import styles from "../style/ProductCard.module.css";
+import Header from './components/navbar';
+import Footer from './components/Footer';
+import styles from "./ProductCard.module.css";
 
 export default function ProductsPage() {
   const [expandedCard, setExpandedCard] = useState(null);
@@ -86,7 +86,6 @@ export default function ProductsPage() {
 
   return (
     <div className={`bg-gray-100 ${styles.backgroundImage}`}>
-      
       <Header />
 
       <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 ${styles.productGrid}`}>
@@ -99,7 +98,7 @@ export default function ProductsPage() {
           >
             <div
               onClick={() => toggleExpandCard(product.id)}
-              className={styles.productCardInner}
+              className={styles.productCardInner} // Use the correct class name here
             >
               <div className={styles.productIcon}>
               <svg width="70" height="63" viewBox="0 0 70 63" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +121,6 @@ export default function ProductsPage() {
       </div>
 
       <Footer />
-
     </div>
   );
 }
