@@ -146,21 +146,23 @@ if (!formData.acceptTerms) {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center" style={{
-        marginBottom: "40px",
-        marginTop:"40px",
+    <div className="min-h-screen flex items-center justify-center shadow-lg dark:bg-neutral-100" style={{
+        borderRadius: "10px",
       }}>
-      <div
-        className="w-full sm:w-1/2 md:w-1/2 p-1"
-        style={{
+       <div
+          className="w-full sm:w-1/2 md:w-1/2 p-8 rounded-b-lg lg:w-6/12 lg:rounded-l-lg lg:rounded-br-none"
+          style={{
           backgroundImage: `url(${PartnerRegisterImage.formbackground})`,
+          marginBottom: "20px",
+          marginTop: "20px",
           backgroundSize: "cover",
-          borderRadius: "10px",
           display: "flex",
           flexDirection: "column",
           marginLeft: "90px",
           minHeight: "115vh", 
           maxHeight: "115vh",
+          alignItems: "center", 
+          justifyContent: "center",
         }}
       >
         
@@ -449,15 +451,16 @@ if (!formData.acceptTerms) {
         </form>
       </div>
       <div
-        className="hidden sm:block w-1/2 bg-cover bg-center rounded-lg"
+        className="hidden sm:block w-1/2 bg-cover bg-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
         style={{
           backgroundImage: `url(${PartnerRegisterImage.grocerybackground})`,
           minHeight: "115vh",
-          borderRadius: "10px",
           height: "100%", 
           display: "flex",
           flexDirection: "column",
           marginRight: "90px",
+          marginBottom: "20px",
+          marginTop: "20px",
         }}
       ></div>
     </div>
