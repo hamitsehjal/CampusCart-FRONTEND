@@ -1,9 +1,7 @@
 // // App.js
 
 import React, { useState } from 'react';
-import Header from './components/navbar';
-import Footer from './components/Footer';
-import styles from "./ProductCard.module.css";
+import styles from "../styles/ProductCard.module.css";
 
 export default function ProductsPage() {
   const [expandedCard, setExpandedCard] = useState(null);
@@ -16,8 +14,12 @@ export default function ProductsPage() {
     }
   };
 
+  const backgroundColorStyle = {
+    backgroundColor: '##FF02023B', 
+  };
 
-  // You can fetch your product data from an API or use local data here
+
+  // We can fetch your product data from an API or use local data here
   const products = [
     {
       id: 1,
@@ -85,11 +87,8 @@ export default function ProductsPage() {
   ];
 
   return (
-    <div className={`bg-gray-100 ${styles.backgroundImage}`}>
-      <Header />
-
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 ${styles.productGrid}`}>
-        {products.map((product) => (
+    <div style={backgroundColorStyle} className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 ${styles.productGrid}`}>
+       {products.map((product) => (
           <div
             key={product.id}
             className={`bg-white rounded-lg shadow-md p-4 ${styles.productCard} ${
@@ -120,7 +119,5 @@ export default function ProductsPage() {
         ))}
       </div>
 
-      <Footer />
-    </div>
   );
 }

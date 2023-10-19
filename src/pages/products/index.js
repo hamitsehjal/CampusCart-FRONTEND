@@ -4,16 +4,14 @@
 import React from 'react';
 import Navbar from "./navbar";
 import Footer from "./footer";
-import ProductCard from './components/ProductCard';
-import Testimonials from './components/Testimonials';
+import ProductsPage from './ProductsPage';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <ProductCard />
-      <Testimonials />
+      <ProductsPage />
       <Footer />
     </div>
   );
