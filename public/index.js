@@ -21,5 +21,15 @@ export const CategoriesImages = {
 };
 
 export const HomePageImage = {
-  grocery1: "/images/homePage/grocery-cart.jpg",
+  grocery1: "/images/homePage/1_bg.png",
+  grocery2: "/images/homePage/person.png",
+  rightTick: "/images/homePage/right_symbol.png",
+  groceryBag: "/images/homePage/g-bag.png",
+  groceryBg: "/images/homePage/2_bg.png",
+  truck: "/images/homePage/truck.png",
+  location: "/images/homePage/location.png",
+  headphones: "/images/homePage/headphones.png",
+  price: "/images/homePage/price.png",
+  grocery3: "/images/homePage/person-1.png",
+  store: "/images/homePage/store.png",
 };
