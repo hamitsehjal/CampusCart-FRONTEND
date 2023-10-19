@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { authenticateUser } from "lib/authenticate";
-import { LoginImage } from "../../public";
 import Alert from "@/components/alert";
 export default function Login() {
   const clearFormData = {
@@ -62,23 +61,7 @@ export default function Login() {
     }
   };
   return (
-    <div className="min-h-screen flex items-center justify-center shadow-lg dark:bg-neutral-300" style={{
-      borderRadius: "10px",
-    }}>
-     <div
-        className="w-full sm:w-1/2 md:w-1/2 p-8 rounded-b-lg lg:w-6/12 lg:rounded-l-lg lg:rounded-br-none"
-        style={{
-          backgroundImage: `url(${LoginImage.loginImageForm})`,
-          backgroundSize: "cover",
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "90px",
-          minHeight: "80vh", 
-          maxHeight: "80vh",
-          alignItems: "center", 
-          justifyContent: "center",
-        }}
-      >
+    <div className=" bg-white p-8  shadow-md">
       <h1 className="text-lg text-campus-text font-cinzel mb-6 text-center">
         Student Log In
       </h1>
@@ -134,18 +117,6 @@ export default function Login() {
           Forgot Password?
         </button>
       </div> */}
-    </div>
-    <div
-        className="hidden sm:block w-1/2 bg-cover bg-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none"
-        style={{
-          backgroundImage: `url(${LoginImage.loginImage})`,
-          minHeight: "80vh",
-          height: "100%", 
-          display: "flex",
-          flexDirection: "column",
-          marginRight: "90px",
-        }}
-      ></div>
     </div>
   );
 }
