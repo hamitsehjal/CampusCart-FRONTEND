@@ -33,3 +33,8 @@ export const HomePageImage = {
   grocery3: "/images/homePage/person-1.png",
   store: "/images/homePage/store.png",
 };
+
+export const PartnerRegisterImage = {
+  grocerybackground: "/images/partnerRegister/grc-background.png",
+  formbackground: "/images/partnerRegister/form-background.png",
+}

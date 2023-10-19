@@ -43,7 +43,7 @@ export const PartnerSection = () => {
                                  ))}
                             </ul>
                             <div className='flex space-x-5'>
-                            <Link href='#' className='bg-green-600 text-white rounded-lg py-4 px-5 duration-300 transition-all ease-in-out hover:bg-blue-500 hover:shadow-lg inline-block relative top-0 hover:-top-1'>
+                            <Link href='/partner-register' className='bg-green-600 text-white rounded-lg py-4 px-5 duration-300 transition-all ease-in-out hover:bg-blue-500 hover:shadow-lg inline-block relative top-0 hover:-top-1'>
                                 Become A Partner
                             </Link>
                         </div>
