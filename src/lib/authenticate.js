@@ -31,8 +31,8 @@ export async function registerUser(userData) {
  * If status code is 201, return true 
  * Otherwise, throw an error with the API's error message 
  */
-async function registerPartner(formData) {
-    const res = await fetch(`http://localhost:8080/register-user`, {
+export async function registerPartner(formData) {
+    const res = await fetch(`http://localhost:8080/register-partner`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

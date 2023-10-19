@@ -108,15 +108,15 @@ export default function Login() {
           </button>
         </div>
       </form>
-      {/* Forgot Password Button */}
-      {/* <div className="text-center mt-4">
+      {/* Sign Up Button */}
+      <div className="text-center mt-4">
         <button
-          className="text-campus-blue hover:underline"
-        //onClick={() => router.push("#")}  // TO DO: Change route to forgot password page
+          className="bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent"
+          onClick={() => router.push("/user-register")}
         >
-          Forgot Password?
+          Sign Up??
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }

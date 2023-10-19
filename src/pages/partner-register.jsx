@@ -1,11 +1,10 @@
 // This is the Partner-Registration of CampusCart
 
-//import { registerUser } from "lib/authenticate";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Alert from "@/components/alert";
 import { PartnerRegisterImage } from "../../public";
-import { registerPartner } from "../lib/authenticate";
+import { registerPartner } from "lib/authenticate";
 export default function PartnerRegister() {
   const clearFormData = {
     storeName: "",
@@ -21,6 +20,7 @@ export default function PartnerRegister() {
     storeDescription: "",
     contactFirstName: "",
     contactLastName: "",
+    acceptTerms: false,
   };
 
   const [formData, setFormData] = useState(clearFormData);
@@ -39,6 +39,7 @@ export default function PartnerRegister() {
     storeDescription: "",
     contactFirstName: "",
     contactLastName: "",
+    acceptTerms: "",
   });
 
   const router = useRouter();
@@ -136,8 +137,8 @@ export default function PartnerRegister() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setWarning("");
     if (validateForm()) {
-      setWarning("");
       console.log("Form submitted:", formData);
       try {
         // Handle form submission and routing here
@@ -156,19 +157,19 @@ export default function PartnerRegister() {
     }}>
       <div
         className="w-full sm:w-1/2 md:w-1/2 p-8 rounded-b-lg lg:w-6/12 lg:rounded-l-lg lg:rounded-br-none"
-        style={{
-          backgroundImage: `url(${PartnerRegisterImage.formbackground})`,
-          marginBottom: "20px",
-          marginTop: "20px",
-          backgroundSize: "cover",
-          display: "flex",
-          flexDirection: "column",
-          marginLeft: "90px",
-          minHeight: "115vh",
-          maxHeight: "115vh",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+      // style={{
+      //   backgroundImage: `url(${PartnerRegisterImage.formbackground})`,
+      //   marginBottom: "20px",
+      //   marginTop: "20px",
+      //   backgroundSize: "cover",
+      //   display: "flex",
+      //   flexDirection: "column",
+      //   marginLeft: "90px",
+      //   minHeight: "115vh",
+      //   maxHeight: "115vh",
+      //   alignItems: "center",
+      //   justifyContent: "center",
+      // }}
       >
 
         <h1 className="text-lg text-campus-text font-cinzel mb-6 rounded-lg text-center">
