@@ -48,3 +48,9 @@ export const UserRegisterImage = {
   userRegisterGif: "/images/userRegister/userRegisterImage.gif",
   registerImageForm: "/images/userRegister/formImage.png",
 }
+
+export const CartDummyImages = {
+  strawberry: "/images/cart-dummy/strawberry.webp",
+  avacado: "/images/cart-dummy/avacado.webp",
+  onion: "/images/cart-dummy/onion.jpeg",
+}
