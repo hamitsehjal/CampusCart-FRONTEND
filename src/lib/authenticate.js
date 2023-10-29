@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
  * 
  */
 export async function registerUser(userData) {
-    const res = await fetch(`http://localhost:8080/register-user`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/register-user`, {
         method: 'POST',
         // userData is a FormData object so no need to JSON.stringify
         body: userData,
@@ -32,7 +32,7 @@ export async function registerUser(userData) {
  * Otherwise, throw an error with the API's error message 
  */
 export async function registerPartner(formData) {
-    const res = await fetch(`http://localhost:8080/register-partner`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/register-partner`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ export async function registerPartner(formData) {
  * 3. If status code is not 200, throw an error with the error message from the API
  */
 export async function authenticateUser(user, password) {
-    const res = await fetch(`http://localhost:8080/login`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
