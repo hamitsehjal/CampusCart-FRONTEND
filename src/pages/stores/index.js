@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import { getToken } from 'lib/authenticate';
 import { useRouter } from 'next/router';
-import { useStores } from 'utils';
+import { useStores, useStoreCategories } from 'utils';
 export default function Stores() {
     const router = useRouter();
     const options = {
@@ -13,18 +13,41 @@ export default function Stores() {
     }
     const { storesData, storesError, storesLoading } = useStores(options);
 
+    const { storeCategoriesData, storeCategoriesLoading, storeCategoriesError } = useStoreCategories();
 
 
     return (
         <div className="bg-campus-background p-4 md:p-8 lg:p-10">
             <h1 className="text-2xl md:text-3xl font-noto_serif ">Stores to help you save</h1>
             {/* Store Categories */}
-            {/* <div className='flex flex-wrap space-x-2 font-noto_serif'>
+            {storeCategoriesError ? (<h2>Error Occurred when fetching Store Categories</h2>) :
+                storeCategoriesLoading ? (<h2>Loading Store Categories</h2>) : (
+                    <div className='flex flex-wrap space-x-2 font-noto_serif'>
+                        {
+                            storeCategoriesData.categories.map((category) => {
+                                return <div
+                                    key={category._id}
+                                    className='flex flex-col p-2 max-w-xs items-center'>
+                                    <div className="shrink-0 bg-slate-200 rounded-xl shadow-lg">
+                                        <Image
+                                            src={category.imageUrl}
+                                            alt={category.name}
+                                            width={50} height={50} />
+                                    </div>
+                                    <div className=" text-slate-500 text-sm">
+                                        {category.name}
+                                    </div>
+                                </div>
+                            })
+                        }
+                    </div>
+                )
 
-            </div> */}
+            }
+
             {/* Stores */}
-            {storesError ? (<h2>Error Occurred</h2>
-            ) : storesLoading ? (<h2>Loading Data</h2>
+            {storesError ? (<h2>Error Occurred while fetching stores</h2>
+            ) : storesLoading ? (<h2>Loading Stores</h2>
             ) : (
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 font-noto_serif'>
                     {
