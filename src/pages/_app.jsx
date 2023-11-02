@@ -2,7 +2,6 @@
 // For more information: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
 
 import { SWRConfig } from 'swr';
-import { getToken } from 'lib/authenticate';
 import RouteGuard from '@/components/RouteGuard';
 import Layout from '@/components/layout';
 import '@/styles/globals.css';
