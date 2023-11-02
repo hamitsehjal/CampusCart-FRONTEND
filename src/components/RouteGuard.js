@@ -18,7 +18,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { isAuthenticated } from "lib/authenticate";
-const PUBLIC_ROUTES = ['/', '/login', '/user-register', '/partner-register', '/confirm-partner'];
+const PUBLIC_ROUTES = ['/', '/login', '/user-register', '/partner-register', '/confirm-partner', '/stores'];
 export default function RouteGuard(props) {
     const router = useRouter();
     const [authorized, setAuthorized] = useState(false);
