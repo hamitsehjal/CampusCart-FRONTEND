@@ -6,15 +6,19 @@ import useSWR from 'swr';
 export default function Stores() {
     const router = useRouter();
 
-
-    const fetcher = (...args) => fetch(...args).then(res => res.json());
     const options = {
         headers: {
             'Authorization': `Bearer ${getToken()}`,
             'Content-Type': 'application/json',
         }
     }
-    const { data, error, isLoading } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_API}/private/stores`, url => fetcher(url, options));
+    const { data, error, isLoading } = useSWR(
+        [`${process.env.NEXT_PUBLIC_BACKEND_API}/private/stores`, options],
+        {
+            revalidateIfStale: false,
+            revalidateOnReconnect: false,
+            revalidateOnFocus: false,
+        });
 
 
     return (
@@ -30,13 +34,14 @@ export default function Stores() {
             ) : (
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-2 font-noto_serif'>
                     {
-                        data.map((store) => {
+                        data.stores.map((store) => {
                             return <div
                                 key={store._id}
-                                onClick={(e) => router.push(`/products/${store._id}`)}
+                                onClick={() => router.push(`/products/${store._id}`)}
                                 className="p-2 w-full  mx-auto bg-campus-background rounded-xl shadow-lg flex  items-center space-x-4" >
                                 <div className="shrink-0">
-                                    <Image src={store.imageUrl}
+                                    <Image
+                                        src={store.imageUrl}
                                         alt={`${store.name} Logo`}
                                         width={80} height={60}
                                     />
