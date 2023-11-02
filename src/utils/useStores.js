@@ -1,12 +1,8 @@
 import useSWR from "swr";
-export default function useStores(options) {
+export default function useStores(category = 'all', options) {
     const { data, error, isLoading } = useSWR(
-        [`${process.env.NEXT_PUBLIC_BACKEND_API}/public/stores`, options],
-        {
-            revalidateIfStale: false,
-            revalidateOnReconnect: false,
-            revalidateOnFocus: false,
-        });
+        [`${process.env.NEXT_PUBLIC_BACKEND_API}/public/stores?category=${category}`, options]
+    );
 
     return {
         storesData: data,

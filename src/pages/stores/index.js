@@ -1,9 +1,12 @@
 // src/pages/stores/index.js
 import Image from 'next/image'
+import { useState } from 'react';
 import { getToken } from 'lib/authenticate';
 import { useRouter } from 'next/router';
 import { useStores, useStoreCategories } from 'utils';
+import { CategoriesImages } from '../../../public'
 export default function Stores() {
+    const [category, setCategory] = useState('all');
     const router = useRouter();
     const options = {
         headers: {
@@ -11,7 +14,7 @@ export default function Stores() {
             'Content-Type': 'application/json',
         }
     }
-    const { storesData, storesError, storesLoading } = useStores(options);
+    const { storesData, storesError, storesLoading } = useStores(category, options);
 
     const { storeCategoriesData, storeCategoriesLoading, storeCategoriesError } = useStoreCategories();
 
@@ -23,10 +26,24 @@ export default function Stores() {
             {storeCategoriesError ? (<h2>Error Occurred when fetching Store Categories</h2>) :
                 storeCategoriesLoading ? (<h2>Loading Store Categories</h2>) : (
                     <div className='flex flex-wrap space-x-2 font-noto_serif'>
+                        <div
+                            onClick={() => setCategory('all')}
+                            className='flex flex-col p-2 max-w-xs items-center'>
+                            <div className="shrink-0 bg-slate-200 rounded-xl shadow-lg">
+                                <Image
+                                    src={CategoriesImages.grocery}
+                                    alt="All"
+                                    width={50} height={50} />
+                            </div>
+                            <div className=" text-slate-500 text-sm">
+                                All
+                            </div>
+                        </div>
                         {
                             storeCategoriesData.categories.map((category) => {
                                 return <div
                                     key={category._id}
+                                    onClick={() => setCategory(category.name)}
                                     className='flex flex-col p-2 max-w-xs items-center'>
                                     <div className="shrink-0 bg-slate-200 rounded-xl shadow-lg">
                                         <Image
