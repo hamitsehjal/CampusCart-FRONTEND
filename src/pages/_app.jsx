@@ -1,5 +1,7 @@
 
 // For more information: https://nextjs.org/docs/pages/building-your-application/routing/custom-app#usage
+
+import { SWRConfig } from 'swr';
 import RouteGuard from '@/components/RouteGuard';
 import Layout from '@/components/layout';
 import '@/styles/globals.css';
@@ -27,6 +29,25 @@ const mono = Space_Mono({
     variable: '--font-mono',
     weight: '400',
 });
+
+// options for SWRConfig
+const swrConfig = {
+    fetcher:
+        async ([url, options]) => {
+            const res = await fetch(url, options);
+            // if the status code is not in the range of 200-299,
+            // We will try to parse and throw an error 
+            if (!res.ok) {
+                const error = new Error(`Error while fetching data`);
+                // Attach extra information to error object 
+                error.info = await res.json();
+                error.status = res.status;
+                throw error;
+            }
+            return await res.json();
+
+        }
+}
 export default function MyApp({ Component, pageProps }) {
     return (
         <>
@@ -43,7 +64,9 @@ export default function MyApp({ Component, pageProps }) {
             </style>
             <RouteGuard>
                 <Layout>
-                    <Component>{pageProps}</Component>
+                    <SWRConfig value={swrConfig}>
+                        <Component>{pageProps}</Component>
+                    </SWRConfig>
                 </Layout>
             </RouteGuard>
         </>)

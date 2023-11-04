@@ -13,9 +13,9 @@ export default function Footer() {
                         <div className='flex flex-col gap-2'>
                             <Link href='#'>Why CampusCart?</Link>
                             <Link href='#'>FAQ</Link>
-                            <Link href='#'>Become a Partner</Link>
-                            <Link href='#'>Log In</Link>
-                            <Link href='#'>Sign Up</Link>
+                            <Link href='/partner-register'>Become a Partner</Link>
+                            <Link href='/login'>Log In</Link>
+                            <Link href='/user-register'>Sign Up</Link>
                             <Link href='/stores'>Stores</Link>
                             <Link href='#'>Media & Community</Link>
                         </div>

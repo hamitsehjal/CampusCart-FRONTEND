@@ -7,7 +7,7 @@ import jwt_decode from 'jwt-decode';
  * 
  */
 export async function registerUser(userData) {
-    const res = await fetch(`http://localhost:8080/register`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/register-user`, {
         method: 'POST',
         // userData is a FormData object so no need to JSON.stringify
         body: userData,
@@ -27,12 +27,39 @@ export async function registerUser(userData) {
 }
 
 /**
+ * Given the partner information, make a request to our server with api endpoint(partner-register)
+ * If status code is 201, return true 
+ * Otherwise, throw an error with the API's error message 
+ */
+export async function registerPartner(formData) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/register-partner`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (res.status == 201) {
+        return true;
+    } else {
+        /**
+      * Our Error object from server has this structure:
+      * https://github.com/hamitsehjal/CampusCart-BACKEND/blob/main/src/response.js#L35C7-L35C8
+      */
+        throw new Error(data.error.message);
+    }
+}
+
+/**
  * 1. Given an email and password, it should obtain JWT from our Server's api/login route
  * 2. Store the JWT token locally if status code of above request's response is 200
  * 3. If status code is not 200, throw an error with the error message from the API
  */
 export async function authenticateUser(user, password) {
-    const res = await fetch(`http://localhost:8080/login`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
