@@ -11,6 +11,7 @@ Render Products Page
 
 */
 import Category from '@/components/category';
+import ProductsAll from '@/components/ProductsAll';
 import { getToken } from 'lib/authenticate';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -50,6 +51,10 @@ export default function Products() {
         isLoading={productsCategoriesLoading}
       />
       {/* Products */}
-
+      <ProductsAll
+        data={productsData}
+        error={productsError}
+        isLoading={productsLoading}
+      />
     </div >)
 }
