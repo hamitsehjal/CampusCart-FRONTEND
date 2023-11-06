@@ -16,7 +16,10 @@ export default function Stores(props) {
           props.data.stores.map((store) => {
             return <div
               key={store._id}
-              onClick={() => router.push(`/products/${store._id}`)}
+              onClick={() => router.push({
+                pathname: `/products`,
+                query: { storeId: store._id }
+              })}
               className="p-2 w-full  mx-auto bg-campus-background rounded-xl shadow-lg flex  items-center space-x-4" >
               <div className="shrink-0">
                 <Image
