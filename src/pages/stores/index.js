@@ -1,17 +1,10 @@
 // src/pages/stores/index.js
 import { useState } from 'react';
-import { getToken } from 'lib/authenticate';
 import { useStores, useStoreCategories } from 'utils';
 import Category from '@/components/category';
 import Stores from '@/components/stores';
 export default function StoresPage() {
   const [category, setCategory] = useState('all');
-  const options = {
-    headers: {
-      'Authorization': `Bearer ${getToken()}`,
-      'Content-Type': 'application/json',
-    }
-  }
   const { storesData, storesError, storesLoading } = useStores(category);
 
   const { storeCategoriesData, storeCategoriesLoading, storeCategoriesError } = useStoreCategories();
