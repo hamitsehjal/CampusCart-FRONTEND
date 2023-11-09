@@ -23,11 +23,11 @@ export default function Products() {
 
   // Extract the storeId from query object
   const { storeId } = router.query;
-
+  console.log(`StoreId received: ${storeId}`);
   // Configure Options object for private Access
   const options = {
     headers: {
-      'Authorizaton': `Bearer ${getToken()}`,
+      'Authorization': `Bearer ${getToken()}`,
       'Content-Type': `application/json`,
     }
   }

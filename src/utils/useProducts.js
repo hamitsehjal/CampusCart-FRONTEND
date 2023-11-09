@@ -8,7 +8,7 @@
 import useSWR from 'swr';
 
 export default function useProducts(id, category = "all", options = {}) {
-  const { data, error, isLoading } = useSWR([`${process.env.NEXT_PUBLIC_BACKEND_API}/private/products/:${id}?category=${category}`, options]);
+  const { data, error, isLoading } = useSWR([`${process.env.NEXT_PUBLIC_BACKEND_API}/private/products/${id}?category=${category}`, options]);
 
   return {
     productsData: data,

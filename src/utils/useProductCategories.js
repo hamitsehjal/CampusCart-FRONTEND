@@ -5,6 +5,7 @@ Custom Hook for fetching Store Categories from Backend Server
 */
 import useSWR from 'swr'
 export default function useProductCategories(options = {}) {
+  console.log(options);
   const { data, error, isLoading } = useSWR(
     [`${process.env.NEXT_PUBLIC_BACKEND_API}/private/product-categories`, options],
     {
