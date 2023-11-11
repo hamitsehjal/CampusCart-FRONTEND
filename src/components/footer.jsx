@@ -17,6 +17,7 @@ export default function Footer() {
                             <Link href='/login'>Log In</Link>
                             <Link href='/user-register'>Sign Up</Link>
                             <Link href='/stores'>Stores</Link>
+                            <Link href='/order-confirmation'>Order Confirmation</Link>
                             <Link href='#'>Media & Community</Link>
                         </div>
                     </div>
