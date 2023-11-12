@@ -24,7 +24,6 @@ const PUBLIC_ROUTES = [
   '/partner-register',
   '/confirm-partner',
   '/stores',
-  '/order-confirmation',
 ];
 export default function RouteGuard(props) {
   const router = useRouter();
