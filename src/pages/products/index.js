@@ -11,7 +11,7 @@ Render Products Page
 
 */
 import Category from '@/components/category';
-import ProductsAll from '@/components/ProductsAll';
+import ProductsAll from '@/components/Products/ProductsAll';
 import { getToken } from 'lib/authenticate';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
