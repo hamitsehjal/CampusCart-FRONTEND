@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -20,7 +19,8 @@ const cartSlice = createSlice({
         image:"www.shoppingcart.com/2323"
       }
     */
-    items: new Map(),
+    items: [],
+
   },
   reducers: {
     /** 
@@ -33,53 +33,36 @@ const cartSlice = createSlice({
     */
     addItem: (state, action) => {
       const newItem = action.payload;
-      const productId = newItem.id;
-      if (state.items.has(productId)) {
-        // increase the quantity of an existing product
-        state.items.get(productId).quantity += 1
-      } else {
-        // add new product 
-        state.items.set(newItem.id, { ...newItem });
-      }
+      state.items.push(newItem);
     },
     /** 
     remove item from cart
       - We expect to receive the product to be removed 
     */
     removeItem: (state, action) => {
-      state.items.delete(action.payload.id);
+      const removeId = action.payload;
+
+      state.items = state.items.filter((item) => item.id !== removeId);
+
     },
 
     // increment quantity
     incrementQuantity: (state, action) => {
       // extract the id of the product
-      const productId = action.payload;
-
-      if (store.items.has(productId)) {
-        // Item exists, increment its quantity
-        state.items.set(productId, {
-          ...state.items.get(productId),
-          quantity: state.items.get(productId).quantity + 1
-        })
-      }
+      const updateId = action.payload;
+      state.items = state.items.map((item) => item.id === updateId ? { ...item, quantity: item.quantity + 1 } : item)
     },
     // decrement quantity
     decrementQuantity: (state, action) => {
       // extract the id of the product
-      const productId = action.payload;
+      const updateId = action.payload;
+      state.items = state.items.map((item) => item.id === updateId ? { ...item, quantity: item.quantity - 1 } : item)
 
-      if (state.items.has(productId)) {
-        // Item exists, decrement the quantity
-        state.items.set(productId, {
-          ...state.items.get(productId),
-          quantity: state.items.get(productId).quantity - 1,
-        });
-      }
     },
 
     // clear cart
     clearCart: (state, action) => {
-      state.items.clear();
+      state.items = [];
     }
   }
 });
