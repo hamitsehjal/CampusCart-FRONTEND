@@ -1,3 +1,4 @@
+'use client';
 /**End Goal:   Redirect to '/login' route if unauthenticated
  *
  * - Check if the current page is a public or private page
@@ -24,7 +25,7 @@ const PUBLIC_ROUTES = [
   '/partner-register',
   '/confirm-partner',
   '/stores',
-  '/order-confirmation',
+  '/cart',
 ];
 export default function RouteGuard(props) {
   const router = useRouter();

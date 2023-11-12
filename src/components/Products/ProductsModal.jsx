@@ -1,7 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { addItem, removeItem } from '../../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from "store/cartSelector";
+const ProductsModal = ({ selectedProduct, closeModal }) => {
+  const dispatch = useDispatch();
+  const [addToCartClicked, setAddToCartClicked] = useState(false);
 
-const ProductsModal = ({ selectedProduct, closeModal, decreaseQuantity, increaseQuantity, quantity }) => {
+  const itemsInCart = useSelector(selectCartItems);
+
+  useEffect(() => {
+    setAddToCartClicked(itemsInCart.some((item) => item.id === selectedProduct._id));
+  }, [itemsInCart]);
+  // Handle add to Cart Option
+  const handleAddToCart = (item) => {
+    dispatch(addItem(item));
+  }
+
+  // Handle remvoe from Cart Option
+  const handleRemoveFromCart = (value) => {
+    console.log(`Remove from Cart!! for id: ${value}`);
+    dispatch(removeItem(value));
+  }
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-md w-4/5 h-4/5 flex relative">
@@ -28,19 +48,26 @@ const ProductsModal = ({ selectedProduct, closeModal, decreaseQuantity, increase
           <p className="text-green-600 font-noto_serif mt-4 mb-2">${selectedProduct.price}</p>
           {/*MODAL WINDOW - INCREASE AND DECREASE QUANTITY BUTTON*/}
           <div className="mt-10">
-            <button
-              onClick={() => decreaseQuantity(selectedProduct._id)}
+            {!addToCartClicked && <button
+              onClick={() => handleAddToCart({
+                id: selectedProduct._id,
+                name: selectedProduct.name,
+                quantity: 1,
+                price: selectedProduct.price,
+                image: selectedProduct.imageUrl,
+              })}
               className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
             >
-              -
-            </button>
-            <span className="mx-2 font-semibold">{quantity[selectedProduct._id] || 0}</span>
-            <button
-              onClick={() => increaseQuantity(selectedProduct._id)}
-              className="bg-campus-red hover:bg-campus-accent text-white py-1 px-2 rounded"
-            >
-              +
-            </button>
+              Add to Cart!!
+            </button>}
+            {
+              addToCartClicked && <button
+                onClick={() => handleRemoveFromCart(selectedProduct._id)}
+                className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
+              >
+                Remove from Cart!!
+              </button>
+            }
           </div>
         </div>
       </div>

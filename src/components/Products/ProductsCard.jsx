@@ -1,7 +1,28 @@
-import React from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "../../store/cartSlice";
+import { selectCartItems } from '../../store/cartSelector';
+const ProductsCard = ({ product, openModal }) => {
+  const [addToCartClicked, setAddToCardClicked] = useState(false);
 
-const ProductsCard = ({ product, openModal, decreaseQuantity, increaseQuantity, quantity }) => {
+  const itemsInCart = useSelector(selectCartItems);
+  useEffect(() => {
+    setAddToCardClicked(itemsInCart.some(item => item.id === product._id))
+  }, [itemsInCart]);
+  const dispatch = useDispatch();
+  // Handle add to Cart Option
+  const handleAddToCart = (value) => {
+    console.log("Add to Cart Clicked!!")
+    dispatch(addItem(value));
+  }
+
+  // Handle remvoe from Cart Option
+  const handleRemoveFromCart = (value) => {
+    console.log(`Remove from Cart!! for id: ${value}`);
+    dispatch(removeItem(value));
+  }
   return (
     <div
       key={product._id}
@@ -24,24 +45,29 @@ const ProductsCard = ({ product, openModal, decreaseQuantity, increaseQuantity, 
       <div className="flex items-center justify-between">
         <div className="text-xl font-semibold text-green-600 font-noto_serif">${product.price}</div>
         <div className="flex items-center">
-            {/*INCREASE AND DECREASE QUANTITY BUTTON*/}
-          <button
-            onClick={() => decreaseQuantity(product._id)}
+          {!addToCartClicked && < button
+            onClick={() => handleAddToCart({
+              id: product._id,
+              name: product.name,
+              quantity: 1,
+              price: product.price,
+              image: product.imageUrl,
+            })}
             className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
           >
-            -
+            Add to Cart!!
           </button>
-          <span className="mx-2 font-semibold">{quantity[product._id] || 0}</span>
-          <button
-            onClick={() => increaseQuantity(product._id)}
-            className="bg-campus-red hover:bg-campus-accent text-white py-1 px-2 rounded"
+          }
+          {addToCartClicked && <button
+            onClick={() => handleRemoveFromCart(product._id)}
+            className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
           >
-            +
-          </button>
+            Remove from Cart
+          </button>}
+
         </div>
       </div>
-    </div>
-  );
+    </div>)
 };
 
 export default ProductsCard;

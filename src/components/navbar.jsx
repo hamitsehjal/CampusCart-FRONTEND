@@ -76,6 +76,13 @@ export default function Navbar() {
           >
             Log out
           </Link>}
+          {token && <Link
+            className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
+
+            href="/cart"
+          >
+            Cart
+          </Link>}
         </div>
         {/* Mobile navigation */}
         <div className="lg:hidden flex flex-col items-center justify-center text-xl">
