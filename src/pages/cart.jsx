@@ -1,3 +1,5 @@
+'use client';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCartItems, selectCartTax, selectCartTotal, selectCartSubTotal } from '../store/cartSelector';
 import { removeItem, incrementQuantity, decrementQuantity } from '../store/cartSlice';
@@ -9,7 +11,6 @@ const Cart = () => {
   const cartTax = useSelector(selectCartTax);
   const cartSubTotal = useSelector(selectCartSubTotal);
 
-
   return (
 
     <div className="h-screen bg-gray-100 pt-20">
@@ -19,7 +20,6 @@ const Cart = () => {
           {
             cartItems.map((item) => {
               return (
-
 
                 <div className="h-50 w-100 mr-1 shadow-md justify-between mb-6 rounded-lg bg-white p-6  sm:flex sm:justify-start ">
                   <Image
@@ -36,26 +36,22 @@ const Cart = () => {
 
                     <div className="flex items-center border-gray-100">
                       <button
-                        onClick={() => dispatch(decrementQuantity(product.id))}
+                        onClick={() => dispatch(decrementQuantity(item.id))}
                         className="mr-1 cursor-pointer bg-gray-200 rounded-full py-1 px-3 duration-100 hover:bg-campus-blue hover:text-white"
                       >
                         -
                       </button>
-                      <input
-                        className="h-6 w-10 border rounded-full bg-white text-center text-xs"
-                        type="number"
-                        value="5"
-                        min="0"
-                      />
+                      <span
+                        className="h-6 w-10 border rounded-full bg-white text-center text-xs">{item.quantity}</span>
                       <button
-                        onClick={() => dispatch(incrementQuantity(product.id))}
+                        onClick={() => dispatch(incrementQuantity(item.id))}
                         className="ml-1 cursor-pointer bg-gray-300 rounded-full py-1 px-3 duration-100 hover:bg-campus-blue hover:text-white"
                       >
                         +
                       </button>
                       <div>
                         <button
-                          onClick={() => dispatch(removeItem(product.id))}
+                          onClick={() => dispatch(removeItem(item.id))}
                           className="bg-gray-200 rounded-full py-0 px-2 ml-2 text-black font-bold cursor-pointer hover:bg-campus-red hover:text-white"
                         >
                           x

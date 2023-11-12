@@ -1,12 +1,27 @@
-import React from "react";
+'use client';
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, removeItem } from "../../store/cartSlice";
+import { selectCartItems } from '../../store/cartSelector';
 const ProductsCard = ({ product, openModal }) => {
+  const [addToCartClicked, setAddToCardClicked] = useState(false);
+
+  const itemsInCart = useSelector(selectCartItems);
+  useEffect(() => {
+    setAddToCardClicked(itemsInCart.some(item => item.id === product._id))
+  }, [itemsInCart]);
   const dispatch = useDispatch();
   // Handle add to Cart Option
-  const handleAddToCart = (item) => {
-    dispatch(addItem(item));
+  const handleAddToCart = (value) => {
+    console.log("Add to Cart Clicked!!")
+    dispatch(addItem(value));
+  }
+
+  // Handle remvoe from Cart Option
+  const handleRemoveFromCart = (value) => {
+    console.log(`Remove from Cart!! for id: ${value}`);
+    dispatch(removeItem(value));
   }
   return (
     <div
@@ -30,9 +45,8 @@ const ProductsCard = ({ product, openModal }) => {
       <div className="flex items-center justify-between">
         <div className="text-xl font-semibold text-green-600 font-noto_serif">${product.price}</div>
         <div className="flex items-center">
-
-          <button
-            onClick={handleAddToCart({
+          {!addToCartClicked && < button
+            onClick={() => handleAddToCart({
               id: product._id,
               name: product.name,
               quantity: 1,
@@ -43,10 +57,17 @@ const ProductsCard = ({ product, openModal }) => {
           >
             Add to Cart!!
           </button>
+          }
+          {addToCartClicked && <button
+            onClick={() => handleRemoveFromCart(product._id)}
+            className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
+          >
+            Remove from Cart
+          </button>}
+
         </div>
       </div>
-    </div>
-  );
+    </div>)
 };
 
 export default ProductsCard;

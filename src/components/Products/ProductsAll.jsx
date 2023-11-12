@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import ProductCard from "./ProductsCard";
 import ProductModal from "./ProductsModal";
@@ -38,9 +39,6 @@ const ProductsAll = (props) => {
         <ProductModal
           selectedProduct={selectedProduct}
           closeModal={closeModal}
-          decreaseQuantity={decreaseQuantity}
-          increaseQuantity={increaseQuantity}
-          quantity={quantities}
         />
       )}
     </>

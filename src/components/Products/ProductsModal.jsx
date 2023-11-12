@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { addItem } from '../../store/cartSlice';
-import { useDispatch } from 'react-redux';
+import { addItem, removeItem } from '../../store/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCartItems } from "store/cartSelector";
 const ProductsModal = ({ selectedProduct, closeModal }) => {
   const dispatch = useDispatch();
+  const [addToCartClicked, setAddToCartClicked] = useState(false);
+
+  const itemsInCart = useSelector(selectCartItems);
+
+  useEffect(() => {
+    setAddToCartClicked(itemsInCart.some((item) => item.id === selectedProduct._id));
+  }, [itemsInCart]);
   // Handle add to Cart Option
   const handleAddToCart = (item) => {
     dispatch(addItem(item));
+  }
+
+  // Handle remvoe from Cart Option
+  const handleRemoveFromCart = (value) => {
+    console.log(`Remove from Cart!! for id: ${value}`);
+    dispatch(removeItem(value));
   }
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
@@ -34,18 +48,26 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
           <p className="text-green-600 font-noto_serif mt-4 mb-2">${selectedProduct.price}</p>
           {/*MODAL WINDOW - INCREASE AND DECREASE QUANTITY BUTTON*/}
           <div className="mt-10">
-            <button
-              onClick={handleAddToCart({
-                id: product._id,
-                name: product.name,
+            {!addToCartClicked && <button
+              onClick={() => handleAddToCart({
+                id: selectedProduct._id,
+                name: selectedProduct.name,
                 quantity: 1,
-                price: product.price,
-                image: product.imageUrl,
+                price: selectedProduct.price,
+                image: selectedProduct.imageUrl,
               })}
               className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
             >
               Add to Cart!!
-            </button>
+            </button>}
+            {
+              addToCartClicked && <button
+                onClick={() => handleRemoveFromCart(selectedProduct._id)}
+                className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
+              >
+                Remove from Cart!!
+              </button>
+            }
           </div>
         </div>
       </div>
