@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
-
-const ProductsCard = ({ product, openModal, decreaseQuantity, increaseQuantity, quantity }) => {
+import { useDispatch } from "react-redux";
+import { addItem } from "../../store/cartSlice";
+const ProductsCard = ({ product, openModal }) => {
+  const dispatch = useDispatch();
+  // Handle add to Cart Option
+  const handleAddToCart = (item) => {
+    dispatch(addItem(item));
+  }
   return (
     <div
       key={product._id}
@@ -24,19 +30,18 @@ const ProductsCard = ({ product, openModal, decreaseQuantity, increaseQuantity, 
       <div className="flex items-center justify-between">
         <div className="text-xl font-semibold text-green-600 font-noto_serif">${product.price}</div>
         <div className="flex items-center">
-            {/*INCREASE AND DECREASE QUANTITY BUTTON*/}
+
           <button
-            onClick={() => decreaseQuantity(product._id)}
+            onClick={handleAddToCart({
+              id: product._id,
+              name: product.name,
+              quantity: 1,
+              price: product.price,
+              image: product.imageUrl,
+            })}
             className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
           >
-            -
-          </button>
-          <span className="mx-2 font-semibold">{quantity[product._id] || 0}</span>
-          <button
-            onClick={() => increaseQuantity(product._id)}
-            className="bg-campus-red hover:bg-campus-accent text-white py-1 px-2 rounded"
-          >
-            +
+            Add to Cart!!
           </button>
         </div>
       </div>

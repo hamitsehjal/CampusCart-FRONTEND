@@ -1,7 +1,13 @@
 import React from "react";
 import Image from "next/image";
-
-const ProductsModal = ({ selectedProduct, closeModal, decreaseQuantity, increaseQuantity, quantity }) => {
+import { addItem } from '../../store/cartSlice';
+import { useDispatch } from 'react-redux';
+const ProductsModal = ({ selectedProduct, closeModal }) => {
+  const dispatch = useDispatch();
+  // Handle add to Cart Option
+  const handleAddToCart = (item) => {
+    dispatch(addItem(item));
+  }
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-md w-4/5 h-4/5 flex relative">
@@ -29,17 +35,16 @@ const ProductsModal = ({ selectedProduct, closeModal, decreaseQuantity, increase
           {/*MODAL WINDOW - INCREASE AND DECREASE QUANTITY BUTTON*/}
           <div className="mt-10">
             <button
-              onClick={() => decreaseQuantity(selectedProduct._id)}
+              onClick={handleAddToCart({
+                id: product._id,
+                name: product.name,
+                quantity: 1,
+                price: product.price,
+                image: product.imageUrl,
+              })}
               className="bg-gray-300 hover:bg-gray-200 text-campus-text py-1 px-2 rounded"
             >
-              -
-            </button>
-            <span className="mx-2 font-semibold">{quantity[selectedProduct._id] || 0}</span>
-            <button
-              onClick={() => increaseQuantity(selectedProduct._id)}
-              className="bg-campus-red hover:bg-campus-accent text-white py-1 px-2 rounded"
-            >
-              +
+              Add to Cart!!
             </button>
           </div>
         </div>
