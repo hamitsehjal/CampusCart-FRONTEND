@@ -4,7 +4,7 @@ const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // Get latest items from the Redux Store 'cart' state
+      // Retrieve cart items from request body
       const cartItems = req.body;
 
       console.log("Cart Items:", cartItems);
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       /** 
       Create Stripe Products from Cart Items
       Check out official Stripe Docs: https://stripe.com/docs/api/products/create
-      - array for storing product ids
+      - array for storing product
       - function to create a singe product
       - returns product id  
       */
