@@ -15,7 +15,7 @@ export default function Category(props) {
             className='flex flex-col p-2 max-w-xs items-center'>
             <div className="shrink-0 bg-slate-200 rounded-xl shadow-lg">
               <Image
-                src={CategoriesImages.grocery}
+                src={CategoriesImages.all}
                 alt="All"
                 width={50} height={50} />
             </div>
