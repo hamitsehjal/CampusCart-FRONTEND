@@ -37,7 +37,7 @@ export default function Navbar() {
           >
             <RiShoppingBasket2Line className="h-10  md:h-10 lg:h-16 w-10 md:w-10 lg:w-16 text-campus-background" />
             <span className="text-lg md:text-2xl font-noto_serif">
-              CampusCart
+              campusCART
             </span>
           </Link>
         </div>
