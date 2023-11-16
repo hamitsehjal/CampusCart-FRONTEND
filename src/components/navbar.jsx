@@ -11,9 +11,11 @@ import Link from "next/link";
 
 import { readToken, removeToken } from "lib/authenticate";
 import { useRouter } from "next/router";
-
+import { useSelector } from "react-redux";
+import { selectCartCount } from '../store/cartSelector';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const count = useSelector(selectCartCount)
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -81,7 +83,7 @@ export default function Navbar() {
 
             href="/cart"
           >
-            Cart
+            Cart - <span className="text-xl">{count}</span>
           </Link>}
         </div>
         {/* Mobile navigation */}

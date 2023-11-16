@@ -1,5 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { getCartItems } from 'lib/authenticate';
+let values;
+if (getCartItems()) {
+  values = JSON.parse(getCartItems());
+} else {
+  values = [];
+}
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -8,18 +14,21 @@ const cartSlice = createSlice({
     Each product will have these properties as these are required on Cart's Page
       - id
       - name
+      - description
       - quantity
       - price
       - image
       id:{
         id:"sdfsdfdsf",
         name:"strawberries",
+        description:"...."
         quantity:5,
         price:4,
         image:"www.shoppingcart.com/2323"
       }
     */
-    items: [],
+    // items: JSON.parse(getCartItems()) || [],
+    items: values,
 
   },
   reducers: {

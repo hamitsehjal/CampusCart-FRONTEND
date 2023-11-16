@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { addItem, removeItem } from '../../store/cartSlice';
+import { addItem, decrementQuantity, incrementQuantity, removeItem } from '../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCartItems } from "store/cartSelector";
+import { selectCartItems, selectCartItemById } from "store/cartSelector";
 
 const ProductsModal = ({ selectedProduct, closeModal }) => {
   const dispatch = useDispatch();
   const [addToCartClicked, setAddToCartClicked] = useState(false);
-  const [quantity, setQuantity] = useState(1);
   const itemsInCart = useSelector(selectCartItems);
+  const currentItem = useSelector((state) => selectCartItemById(state, selectedProduct._id));
   const [addToWishlistClicked, setAddToWishlistClicked] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,8 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
       addItem({
         id: selectedProduct._id,
         name: selectedProduct.name,
-        quantity: quantity,
+        description: selectedProduct.description,
+        quantity: 1,
         price: selectedProduct.price,
         image: selectedProduct.imageUrl,
       })
@@ -30,13 +31,11 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
   };
 
   // Handle remvoe from Cart Option
-  const handleRemoveFromCart = (value) => {
-    console.log(`Remove from Cart!! for id: ${value}`);
+  const handleRemoveFromCart = () => {
     dispatch(removeItem(selectedProduct._id));
     setAddToCartClicked(false);
-    setQuantity(1);
   }
-  
+
   const handleAddToWishlist = () => {
     console.log("Toggled Wishlist!");
     setAddToWishlistClicked((prev) => !prev);
@@ -53,11 +52,10 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
         </div>
         <button
           onClick={handleAddToWishlist}
-          className={`text-m absolute top-2 right-8 py-1 px-2 rounded ${
-            addToWishlistClicked
-              ? 'bg-purple-300 text-campus-text'
-              : 'bg-purple-100 hover:bg-purple-300 text-campus-text'
-          }`}
+          className={`text-m absolute top-2 right-8 py-1 px-2 rounded ${addToWishlistClicked
+            ? 'bg-purple-300 text-campus-text'
+            : 'bg-purple-100 hover:bg-purple-300 text-campus-text'
+            }`}
         >
           {addToWishlistClicked ? 'Added' : 'Add to Wishlist'}
         </button>
@@ -82,7 +80,7 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
           <p className="text-green-600 font-noto_serif mt-4 mb-2">${selectedProduct.price}</p>
           {/*MODAL WINDOW - INCREASE AND DECREASE QUANTITY BUTTON*/}
           <div className="mt-10 flex items-center">
-          {!addToCartClicked ? (
+            {!addToCartClicked ? (
               <button
                 onClick={handleAddToCart}
                 className="bg-green-300 hover:bg-green-400 text-campus-text py-1 px-2 rounded"
@@ -92,14 +90,14 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
             ) : (
               <div className="flex items-center">
                 <button
-                  onClick={() => setQuantity((prevQuantity) => Math.max(1, prevQuantity - 1))}
+                  onClick={() => dispatch(decrementQuantity(selectedProduct._id))}
                   className="bg-gray-200 hover:bg-gray-300 text-campus-text py-1 px-2 rounded"
                 >
                   -
                 </button>
-                <span className="mx-2">{quantity}</span>
+                <span className="mx-2">{currentItem.quantity}</span>
                 <button
-                  onClick={() => setQuantity((prevQuantity) => prevQuantity + 1)}
+                  onClick={() => dispatch(incrementQuantity(selectedProduct._id))}
                   className="bg-green-200 hover:bg-green-300 text-campus-text py-1 px-2 rounded"
                 >
                   +
@@ -107,12 +105,12 @@ const ProductsModal = ({ selectedProduct, closeModal }) => {
               </div>
             )}
             {addToCartClicked && (
-            <button
-            onClick={handleRemoveFromCart}
-            className="ml-2 bg-campus-red hover:bg-campus-accent text-white py-0.3 px-1 rounded"
-          >
-            Remove
-          </button>
+              <button
+                onClick={handleRemoveFromCart}
+                className="ml-2 bg-campus-red hover:bg-campus-accent text-white py-0.3 px-1 rounded"
+              >
+                Remove
+              </button>
             )}
           </div>
         </div>

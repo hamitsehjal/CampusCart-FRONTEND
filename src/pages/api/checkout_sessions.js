@@ -19,6 +19,7 @@ export default async function handler(req, res) {
       const products = await Promise.all(cartItems.map(async (item) => {
         const product = await stripe.products.create({
           name: item.name,
+          description: item.description,
           images: [item.image],
         });
         return {
