@@ -12,6 +12,7 @@
   "author": "Hamit Sehjal",
   "license": "MIT",
   "dependencies": {
+    "@react-google-maps/api": "^2.19.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/stripe-js": "^2.1.11",
     "jwt-decode": "^3.1.2",
