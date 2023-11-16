@@ -3,6 +3,12 @@
 // selectCartItems
 export const selectCartItems = (state) => state.cart.items;
 
+// selectCartCount
+export const selectCartCount = (state) => {
+  const allItems = selectCartItems(state);
+
+  return allItems.length;
+}
 // selectCartItemById
 export const selectCartItemById = (state, itemId) => {
   const allItems = selectCartItems(state);

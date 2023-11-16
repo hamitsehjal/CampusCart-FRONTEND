@@ -120,6 +120,11 @@ export function getCartItems() {
     return null
   }
 }
+
+// Empty cart state from loalStorage
+export function removeCartItems() {
+  localStorage.removeItem('cart');
+}
 export function isAuthenticated() {
   const token = readToken();
   return token ? true : false;
