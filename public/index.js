@@ -18,6 +18,7 @@ export const CategoriesImages = {
   beauty: "/images/categories/beauty.webp",
   pharmacy: "/images/categories/pharmacy.webp",
   retail: "/images/categories/retail.webp",
+  all: '/images/categories/default_store.png',
 };
 
 export const HomePageImage = {
