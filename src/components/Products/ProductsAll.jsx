@@ -23,14 +23,14 @@ const ProductsAll = (props) => {
         <h2>Loading Stores</h2>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-2 gap-5 font-noto_serif">
-          {props.data.products.map((product) => (
+          {props.data.products.length != 0 ? props.data.products.map((product) => (
             <ProductCard
               key={product._id}
               product={product}
               openModal={openModal}
 
             />
-          ))
+          )) : (<h3>No Products Found!!</h3>)
           }
         </div>
       )}
