@@ -20,6 +20,7 @@ module.exports = {
         'campus-background': '#ffffff',
         'campus-text': '#0B090A',
         'campus-accent': '#B50603',
+        'campus-blue-accent': '#48495b',
       },
       fontFamily: {
         cinzel: ['var(--font-sans)', ...fontFamily.sans],
