@@ -82,25 +82,64 @@ export async function authenticateUser(user, password) {
   }
 }
 
-function setToken(token) {
-  localStorage.setItem('access_token', token);
+// authenticateStore
+export async function authenticateStore(store, password) {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/storeLogin`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email: store, password: password }),
+  });
+
+  const data = await res.json();
+
+  if (res.status === 200) {
+    setStoreToken(data.token);
+  } else {
+    /**
+    * Our Error object from server has this structure:
+    * https://github.com/hamitsehjal/CampusCart-BACKEND/blob/main/src/response.js#L35C7-L35C8
+    */
+    throw new Error(data.error.message);
+  }
 }
 
-export function getToken() {
+// set token 
+function setToken(token, tokenType = 'user') {
+  if (tokenType === 'store') {
+    localStorage.setItem('store_token', token);
+  }
+  else {
+    localStorage.setItem('access_token', token);
+  }
+}
+
+
+// get token 
+export function getToken(tokenType = 'user') {
   try {
+    if (tokenType === 'store') {
+      return localStorage.getItem('store_token');
+    }
     return localStorage.getItem('access_token');
   } catch (err) {
     return null;
   }
 }
 
-export function removeToken() {
-  localStorage.removeItem('access_token');
+export function removeToken(tokenType = 'user') {
+  if (tokenType === 'store') {
+    localStorage.removeItem('store_token');
+  }
+  else {
+    localStorage.removeItem('access_token');
+  }
 }
 
-export function readToken() {
+export function readToken(tokenType = 'user') {
   try {
-    const token = getToken();
+    const token = getToken(tokenType);
     return token ? jwt_decode(token) : null;
   } catch (err) {
     return null;
