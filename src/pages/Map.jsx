@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useRouter } from 'next/router';
 
 const Map = () => {
+  const router = useRouter();
   const mapContainerStyle = {
     width: '100%',
     height: '100%',
@@ -18,20 +20,20 @@ const Map = () => {
   const [currentPosition, setCurrentPosition] = useState(null);
 
   useEffect(() => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        setCurrentPosition({ lat: latitude, lng: longitude });
-      },
-      (error) => {
-        console.error('Error getting current location:', error);
-      }
-    );
-  } else {
-    alert('Geolocation is not supported by your browser');
-  }
-}, []);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentPosition({ lat: latitude, lng: longitude });
+        },
+        (error) => {
+          console.error('Error getting current location:', error);
+        }
+      );
+    } else {
+      alert('Geolocation is not supported by your browser');
+    }
+  }, []);
 
   const calculateDistance = (coord1, coord2) => {
     const R = 6371; // Earth radius in kilometers
@@ -60,7 +62,9 @@ const Map = () => {
   };
   const handleConfirmLocation = () => {
     setIsLocationConfirmed(true);
-    window.location.href = "/cart";
+    // store location in local storage and redirect to 'order-summary' page 
+    localStorage.setItem('location', selectedLocation.name);
+    router.push('/order-summary')
   };
 
   const resetButtonStyles = () => {

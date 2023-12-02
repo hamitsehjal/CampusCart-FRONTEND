@@ -57,7 +57,7 @@ export default async function handler(req, res) {
         line_items: lineItems,
         mode: 'payment',
         success_url: `${process.env.NEXT_PUBLIC_DOMAIN}/order-confirmation`,
-        cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/cart`,
+        cancel_url: `${process.env.NEXT_PUBLIC_DOMAIN}/order-summary`,
       })
       res.json({ url: session.url });
 
