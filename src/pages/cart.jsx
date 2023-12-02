@@ -5,6 +5,7 @@ import { removeItem, incrementQuantity, decrementQuantity } from '../store/cartS
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { getCartItems, setCartItems } from 'lib/authenticate';
+import { useRouter } from 'next/router';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Cart = () => {
   const cartTax = useSelector(selectCartTax);
   const cartSubTotal = useSelector(selectCartSubTotal);
 
+  const router = useRouter();
   useEffect(() => {
     const updateLocalStorage = () => {
       setCartItems(cartItems);
@@ -23,33 +25,33 @@ const Cart = () => {
   // handle submit for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    router.push('/map')
+    //   try {
+    //     const response = await fetch('/api/checkout_sessions', {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json',
+    //       },
+    //       body: getCartItems(),
+    //     })
 
-    try {
-      const response = await fetch('/api/checkout_sessions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: getCartItems(),
-      })
+    //     if (response.ok) {
+    //       console.log('Payment Form Submitted!!')
+    //       const data = await response.json();
 
-      if (response.ok) {
-        console.log('Payment Form Submitted!!')
-        const data = await response.json();
+    //       // Redirect to the url returns by Stripe session
+    //       window.location.href = data.url;
+    //     }
+    //     else {
+    //       console.log(`Error`, response.status, response.statusText);
+    //     }
 
-        // Redirect to the url returns by Stripe session
-        window.location.href = data.url;
-      }
-      else {
-        console.log(`Error`, response.status, response.statusText);
-      }
-
-    } catch (err) {
-      console.log('error', err.message);
-    }
+    //   } catch (err) {
+    //     console.log('error', err.message);
+    //   }
   }
-  // Configure the Stripe Object
-  loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+  // // Configure the Stripe Object
+  // loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
   return (
 
     <div className="h-screen bg-gray-100 pt-20">
