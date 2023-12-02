@@ -17,7 +17,7 @@
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { isAuthenticated } from 'lib/authenticate';
+import { isAuthenticated, isStoreAuthenticated } from 'lib/authenticate';
 const PUBLIC_ROUTES = [
   '/',
   '/login',
@@ -26,6 +26,7 @@ const PUBLIC_ROUTES = [
   '/confirm-partner',
   '/stores',
   '/cart',
+  '/dashboard'
 ];
 export default function RouteGuard(props) {
   const router = useRouter();
@@ -48,12 +49,30 @@ export default function RouteGuard(props) {
   // authCheck()
   function authCheck(url) {
     const path = url.split('?')[0];
-    if (!PUBLIC_ROUTES.includes(path) && !isAuthenticated()) {
-      console.log(`Trying to access a SECURED ROUTE: ${path}`);
-      setAuthorized(false);
-      router.push('/login');
+    console.log(path)
+    if (!PUBLIC_ROUTES.includes(path)) {
+      if (path.startsWith('/dashboard/')) {
+        // trying to access store Dashboard
+        console.log(`Trying to access a STORE DASHBOARD : ${path}`);
+        if (!isStoreAuthenticated()) {
+          setAuthorized(false);
+          router.push('/dashboard');
+        } else {
+          return setAuthorized(true);
+        }
+      } else {
+        // Shopper workflow
+        if (!isAuthenticated()) {
+          console.log(`Trying to access a SECURED ROUTE: ${path}`);
+
+          setAuthorized(false);
+          router.push('/login');
+        } else {
+          return setAuthorized(true);
+        }
+      }
     } else {
-      setAuthorized(true);
+      return setAuthorized(true);
     }
   }
   return <>{authorized && props.children}</>;
