@@ -84,7 +84,7 @@ export async function authenticateUser(user, password) {
 
 // authenticateStore
 export async function authenticateStore(store, password) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/storeLogin`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/public/store-login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -95,7 +95,8 @@ export async function authenticateStore(store, password) {
   const data = await res.json();
 
   if (res.status === 200) {
-    setStoreToken(data.token);
+    setToken(data.token, 'store');
+    return data.storeId;
   } else {
     /**
     * Our Error object from server has this structure:
@@ -165,6 +166,11 @@ export function removeCartItems() {
   localStorage.removeItem('cart');
 }
 export function isAuthenticated() {
-  const token = readToken();
+  const token = readToken('user');
+  return token ? true : false;
+}
+
+export function isStoreAuthenticated() {
+  const token = readToken('store');
   return token ? true : false;
 }
