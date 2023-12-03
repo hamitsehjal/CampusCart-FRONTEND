@@ -1,6 +1,29 @@
 import React from "react";
+import { useProductCategories } from "utils";
 import Image from "next/image";
+import { getToken } from "lib/authenticate";
 const AddProductModal = ({ isAddModalOpen, closeAddModal, formData, handleImageChange, removeProfile, dummyProducts }) => {
+
+  // configure options for private access 
+  const options = {
+    headers: {
+      'Authorization': `Bearer ${getToken('store')}`,
+      'Content-Type': `application/json`,
+    }
+  }
+  // Extract the Product Categories 
+  const { productCategoriesData, productCategoriesError, productCategoriesLoading } = useProductCategories(options);
+
+  if (productCategoriesLoading) {
+    // Render loading state
+    return <p>Loading...</p>;
+  }
+
+  if (productCategoriesError) {
+    // Render error state
+    return <p>Error: {productCategoriesError.message}</p>;
+  }
+
   return (
     <div>
       {isAddModalOpen && (
@@ -13,7 +36,7 @@ const AddProductModal = ({ isAddModalOpen, closeAddModal, formData, handleImageC
               &times;
             </button>
             <form className="flex flex-col items-center">
-            {formData.profile && (
+              {formData.profile && (
                 <div className="mt-5 text-center">
                   {/*Display Profile Picture*/}
                   <div className="flex justify-center items-center">
@@ -42,7 +65,7 @@ const AddProductModal = ({ isAddModalOpen, closeAddModal, formData, handleImageC
                 onChange={handleImageChange}
                 className="mb-2"
               />
-            {/*Input fields*/}
+              {/*Input fields*/}
               <div>
                 <label className="block text-sm text-campus-text font-medium">Product Name:</label>
                 <input
@@ -55,7 +78,7 @@ const AddProductModal = ({ isAddModalOpen, closeAddModal, formData, handleImageC
                 <select
                   className="mt-1 p-2 border rounded"
                 >
-                  {dummyProducts.map((category) => (
+                  {productCategoriesData.categories.map((category) => (
                     <option key={category._id} value={category.name.toLowerCase()}>
                       {category.name}
                     </option>

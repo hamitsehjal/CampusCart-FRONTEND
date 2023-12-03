@@ -17,7 +17,7 @@ export default function useProductCategories(options = {}) {
 
   return {
     productCategoriesData: data,
-    productsCategoriesLoading: isLoading,
+    productCategoriesLoading: isLoading,
     productCategoriesError: error,
 
   }

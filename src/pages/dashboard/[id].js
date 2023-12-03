@@ -5,22 +5,14 @@ import AddProductModal from "./AddProductModal";
 import ProductList from "./ProductList";
 import { getToken } from "lib/authenticate";
 import UpdateProductModal from "./UpdateProductModal";
-import useProductCategories from "utils/useProductCategories";
-
+import { useProductCategories, useProducts } from "../../utils"
 const Dashboard = () => {
   const router = useRouter()
   // Extract the StoreId 
   const storeId = router.query.id;
-  console.log(`StoreId received: ${storeId}`);
 
-  const dummyProducts = [
-    { _id: 1, name: "Product 1", category: "Category 1", price: 20.0, description: "any description" },
-    { _id: 2, name: "Product 2", category: "Category 2", price: 30.0, description: "any description" },
-    { _id: 2, name: "Product 3", category: "Category 3", price: 40.0, description: "any description" },
-    { _id: 2, name: "Product 4", category: "Category 4", price: 50.0, description: "any description" },
-    { _id: 2, name: "Product 5", category: "Category 5", price: 60.0, description: "any description" },
-  ];
-  
+
+
   // configure options for private access 
   const options = {
     headers: {
@@ -32,13 +24,16 @@ const Dashboard = () => {
   const [category, setCategory] = useState('all');
 
   // Extract the Product Details 
-  //const { productsData, productsError, productsLoading } = useProducts(storeId, category, options);
+  const { productsData, productsError, productsLoading } = useProducts(storeId, category, options);
+  console.log(`StoreId received: ${storeId}; Options: ${JSON.stringify(options.headers, null, 2)}`);
+  console.log(`Products Data: ${productsData}`)
+
 
   // Extract the Product Categories 
   //const { productCategoriesData, productCategoriesError, productsCategoriesLoading } = useProductCategories(options);
 
   //console.log(productCategoriesData.categories)
- // const categories = productCategoriesData.categories;
+  // const categories = productCategoriesData.categories;
   // const categories = productCategoriesData.categories;
 
 
@@ -92,8 +87,20 @@ const Dashboard = () => {
   const handleDelete = (productId) => {
     console.log(`Deleting product with ID: ${productId}`);
   };
+
+  if (productsLoading) {
+    // Render loading state
+    return <p>Loading...</p>;
+  }
+
+  if (productsError) {
+    // Render error state
+    return <p>Error: {productsError.message}</p>;
+  }
+
+  // return <h1>Hello</h1>
   return (
-<div className="container mx-auto mt-8 mb-8">
+    <div className="container mx-auto mt-8 mb-8">
       <DashboardHeader openAddModal={openAddModal} />
       <AddProductModal
         isAddModalOpen={isAddModalOpen}
@@ -101,10 +108,10 @@ const Dashboard = () => {
         formData={formData}
         handleImageChange={handleImageChange}
         removeProfile={removeProfile}
-        dummyProducts={dummyProducts}
+        dummyProducts={productsData}
       />
       <ProductList
-        dummyProducts={dummyProducts}
+        dummyProducts={productsData}
         openUpdateModal={openUpdateModal}
         handleDelete={handleDelete}
       />
