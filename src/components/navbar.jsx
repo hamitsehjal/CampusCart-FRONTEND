@@ -7,6 +7,8 @@ import {
   RiLoginBoxLine,
   RiBodyScanLine,
 } from "react-icons/ri";
+import { BsCart4 } from "react-icons/bs";
+import { CgProfile } from "react-icons/cg";
 import Link from "next/link";
 
 import { readToken, removeToken } from "lib/authenticate";
@@ -71,6 +73,7 @@ export default function Navbar() {
           >
             Sign Up
           </Link>}
+          
           {token && <Link
             className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
             onClick={logout}
@@ -79,11 +82,14 @@ export default function Navbar() {
             Log out
           </Link>}
           {token && <Link
-            className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
-
+            className="flex flex-row gap-2 items-center"
+            
             href="/cart"
           >
-            Cart - <span className="text-xl">{count}</span>
+            <BsCart4 className="h-6 w-6" />
+            <span className="absolute top-1 right-0 bg-red-500 text-white rounded-full px-2">
+              {count}
+            </span>
           </Link>}
         </div>
         {/* Mobile navigation */}
