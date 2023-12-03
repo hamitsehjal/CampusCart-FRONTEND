@@ -54,7 +54,7 @@ const Map = () => {
   const handleSelectSpot = (index) => {
     const location = locations[index];
     setSelectedSpot(location);
-    setIsLocationConfirmed(false); // Reset confirmation when selecting a new spot
+    setIsLocationConfirmed(false);
   };
 
   const handleSelectLocation = () => {
@@ -92,13 +92,14 @@ const Map = () => {
               <Marker
                 position={currentPosition}
                 icon={{
-                  path: window.google.maps.SymbolPath.CIRCLE,
+                  path: (window.google && window.google.maps && window.google.maps.SymbolPath.CIRCLE) || '',
                   scale: 8,
                   fillColor: '#4285F4',
                   fillOpacity: 1,
                   strokeWeight: 1,
                 }}
               />
+
             )}
           </GoogleMap>
         </LoadScript>

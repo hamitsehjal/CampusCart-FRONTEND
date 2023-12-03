@@ -25,7 +25,7 @@ const Cart = () => {
   // handle submit for form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push('/map')
+    router.push('/Map')
     //   try {
     //     const response = await fetch('/api/checkout_sessions', {
     //       method: 'POST',
