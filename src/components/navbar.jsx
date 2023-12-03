@@ -73,7 +73,6 @@ export default function Navbar() {
           >
             Sign Up
           </Link>}
-          
           {token && <Link
             className="px-4 py-2 bg-campus-text font-noto_serif text-sm text-campus-background rounded-3xl hover:bg-campus-background hover:text-campus-text"
             onClick={logout}
@@ -81,6 +80,14 @@ export default function Navbar() {
           >
             Log out
           </Link>}
+          
+          {token && <Link
+            className="flex flex-row gap-2 items-center"
+            href="#"  
+          >
+            <CgProfile className="h-6 w-6" />
+          </Link>}
+          
           {token && <Link
             className="flex flex-row gap-2 items-center"
             
@@ -91,6 +98,7 @@ export default function Navbar() {
               {count}
             </span>
           </Link>}
+          
         </div>
         {/* Mobile navigation */}
         <div className="lg:hidden flex flex-col items-center justify-center text-xl">
@@ -134,6 +142,14 @@ export default function Navbar() {
               <RiLoginBoxLine className="h-6 w-6" />
               <span className="text-sm">Log out</span>
             </Link>}
+
+            {token && <Link
+            className="flex flex-row gap-2 items-center"
+            href="#" 
+          >
+            <CgProfile className="h-6 w-6" />
+            <span className="text-sm">Profile</span>
+          </Link>}
           </div>
         </div>
       )}
