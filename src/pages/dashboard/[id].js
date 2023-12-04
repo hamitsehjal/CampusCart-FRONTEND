@@ -5,22 +5,15 @@ import AddProductModal from "./AddProductModal";
 import ProductList from "./ProductList";
 import { getToken } from "lib/authenticate";
 import UpdateProductModal from "./UpdateProductModal";
-import useProductCategories from "utils/useProductCategories";
-
+import { useProductCategories, useProducts } from "../../utils"
+import { deleteProduct } from "lib/inventory";
 const Dashboard = () => {
   const router = useRouter()
   // Extract the StoreId 
   const storeId = router.query.id;
-  console.log(`StoreId received: ${storeId}`);
 
-  const dummyProducts = [
-    { _id: 1, name: "Product 1", category: "Category 1", price: 20.0, description: "any description" },
-    { _id: 2, name: "Product 2", category: "Category 2", price: 30.0, description: "any description" },
-    { _id: 2, name: "Product 3", category: "Category 3", price: 40.0, description: "any description" },
-    { _id: 2, name: "Product 4", category: "Category 4", price: 50.0, description: "any description" },
-    { _id: 2, name: "Product 5", category: "Category 5", price: 60.0, description: "any description" },
-  ];
-  
+
+
   // configure options for private access 
   const options = {
     headers: {
@@ -29,17 +22,10 @@ const Dashboard = () => {
     }
   }
 
-  const [category, setCategory] = useState('all');
+  // const [category, setCategory] = useState('all');
 
   // Extract the Product Details 
-  //const { productsData, productsError, productsLoading } = useProducts(storeId, category, options);
-
-  // Extract the Product Categories 
-  //const { productCategoriesData, productCategoriesError, productsCategoriesLoading } = useProductCategories(options);
-
-  //console.log(productCategoriesData.categories)
- // const categories = productCategoriesData.categories;
-  // const categories = productCategoriesData.categories;
+  const { productsData, productsError, productsLoading } = useProducts(storeId, "all", options);
 
 
 
@@ -49,6 +35,12 @@ const Dashboard = () => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   const clearFormData = {
+    name: "",
+    price: 0,
+    quantity: 0,
+    category: "",
+    description: "",
+    profile: null,
   };
   const [formData, setFormData] = useState(clearFormData);
 
@@ -89,28 +81,55 @@ const Dashboard = () => {
   };
 
   // TODO: DELETE PRODUCT
-  const handleDelete = (productId) => {
+  const handleDelete = async (productId) => {
     console.log(`Deleting product with ID: ${productId}`);
+    try {
+      await deleteProduct(productId);
+      window.location.reload();
+    } catch (err) {
+      console.log(`Error Occurred while deleting Product`);
+    }
   };
+
+  // Update Product 
+
+
+  if (productsLoading) {
+    // Render loading state
+    return <p>Loading...</p>;
+  }
+
+  if (productsError) {
+    // Render error state
+    return <p>Error: {productsError.message}</p>;
+  }
+
+  // return <h1>Hello</h1>
   return (
-<div className="container mx-auto mt-8 mb-8">
+    <div className="container mx-auto mt-8 mb-8">
       <DashboardHeader openAddModal={openAddModal} />
       <AddProductModal
         isAddModalOpen={isAddModalOpen}
         closeAddModal={closeAddModal}
         formData={formData}
+        setFormData={setFormData}
+        clearFormData={clearFormData}
         handleImageChange={handleImageChange}
         removeProfile={removeProfile}
-        dummyProducts={dummyProducts}
       />
       <ProductList
-        dummyProducts={dummyProducts}
+        dummyProducts={productsData}
         openUpdateModal={openUpdateModal}
         handleDelete={handleDelete}
       />
       <UpdateProductModal
         isUpdateModalOpen={isUpdateModalOpen}
         closeUpdateModal={closeUpdateModal}
+        formData={formData}
+        setFormData={setFormData}
+        clearFormData={clearFormData}
+        openUpdateModal={openUpdateModal}
+        selectedProduct={selectedProduct}
       />
     </div>
   );
