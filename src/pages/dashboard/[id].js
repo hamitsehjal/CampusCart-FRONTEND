@@ -6,6 +6,7 @@ import ProductList from "./ProductList";
 import { getToken } from "lib/authenticate";
 import UpdateProductModal from "./UpdateProductModal";
 import { useProductCategories, useProducts } from "../../utils"
+import { deleteProduct } from "lib/inventory";
 const Dashboard = () => {
   const router = useRouter()
   // Extract the StoreId 
@@ -80,8 +81,14 @@ const Dashboard = () => {
   };
 
   // TODO: DELETE PRODUCT
-  const handleDelete = (productId) => {
+  const handleDelete = async (productId) => {
     console.log(`Deleting product with ID: ${productId}`);
+    try {
+      await deleteProduct(productId);
+      window.location.reload();
+    } catch (err) {
+      console.log(`Error Occurred while deleting Product`);
+    }
   };
 
   if (productsLoading) {
@@ -114,7 +121,11 @@ const Dashboard = () => {
         handleDelete={handleDelete}
       />
       <UpdateProductModal
+        formData={formData}
+        setFormData={setFormData}
+        clearFormData={clearFormData}
         isUpdateModalOpen={isUpdateModalOpen}
+        openUpdateModal={openUpdateModal}
         closeUpdateModal={closeUpdateModal}
       />
     </div>
