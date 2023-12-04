@@ -91,6 +91,9 @@ const Dashboard = () => {
     }
   };
 
+  // Update Product 
+
+
   if (productsLoading) {
     // Render loading state
     return <p>Loading...</p>;
@@ -113,7 +116,6 @@ const Dashboard = () => {
         clearFormData={clearFormData}
         handleImageChange={handleImageChange}
         removeProfile={removeProfile}
-        dummyProducts={productsData}
       />
       <ProductList
         dummyProducts={productsData}
@@ -121,12 +123,13 @@ const Dashboard = () => {
         handleDelete={handleDelete}
       />
       <UpdateProductModal
+        isUpdateModalOpen={isUpdateModalOpen}
+        closeUpdateModal={closeUpdateModal}
         formData={formData}
         setFormData={setFormData}
         clearFormData={clearFormData}
-        isUpdateModalOpen={isUpdateModalOpen}
         openUpdateModal={openUpdateModal}
-        closeUpdateModal={closeUpdateModal}
+        selectedProduct={selectedProduct}
       />
     </div>
   );

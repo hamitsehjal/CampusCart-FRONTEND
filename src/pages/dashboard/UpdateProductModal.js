@@ -4,7 +4,7 @@ import { useProductCategories } from "utils";
 import { updateProduct } from "lib/inventory";
 
 //UPDATE FORM
-const UpdateProductModal = ({ isUpdateModalOpen, closeUpdateModal, formData, setFormData, clearFormData, openUpdateModal }) => {
+const UpdateProductModal = ({ isUpdateModalOpen, closeUpdateModal, formData, setFormData, clearFormData, selectedProduct }) => {
 
   // configure options for private access 
   const options = {
@@ -44,7 +44,7 @@ const UpdateProductModal = ({ isUpdateModalOpen, closeUpdateModal, formData, set
         }
       }
 
-      await updateProduct(form)
+      await updateProduct(form, selectedProduct._id);
     } catch (err) {
       console.log(err);
     }

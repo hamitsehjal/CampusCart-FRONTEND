@@ -32,13 +32,13 @@ export async function addProduct(productData) {
 }
 
 // Update an existing Product
-export async function updateProduct(productData) {
+export async function updateProduct(productData, id) {
     const token = readToken('store');
     const storeId = token.id;
     productData.append(`store`, storeId);
 
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/private/products/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API}/private/products/${id}`, {
         method: 'PUT',
         headers: {
             'Authorization': `Bearer ${getToken('store')}`,
