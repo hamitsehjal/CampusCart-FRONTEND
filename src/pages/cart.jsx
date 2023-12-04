@@ -113,22 +113,21 @@ const Cart = () => {
         <div className="shadow-md mt-0 md:w-1/3 h-full rounded-lg border bg-white p-8">
           <div className="flex justify-between">
             <p className="font-noto_serif font-medium text-black">Subtotal</p>
-            <p className="font-noto_serif font-medium text-black">{cartSubTotal}</p>
+            <p className="font-noto_serif font-medium text-green-500">{cartSubTotal.toFixed(2)}</p>
           </div>
           <div className="flex justify-between">
             <p className="font-noto_serif font-medium text-black">Tax</p>
-            <p className="font-noto_serif font-medium text-black">{cartTax}</p>
+            <p className="font-noto_serif font-medium text-green-500">{cartTax.toFixed(2)}</p>
           </div>
           <hr className="my-3" />
-          <div className="flex justify-between">
-            <p className="font-cinzel font-medium text-black text-lg">Total</p>
-            <div className="my-3">
-              <p className="mb-1 text-lg font-cinzel font-bold text-black">{cartTotal}</p>
-              <p className="text-sm font-noto_serif font-medium text-black">including Tax</p>
-            </div>
-          </div>
+
+          <div className="flex justify-between"> 
+            <p className="font-cinzel font-medium text-campus-text text-lg">Total</p>
+            <p className="mb-1 text-lg font-cinzel font-bold text-green-700">${cartTotal.toFixed(2)}</p>
+        </div>
+        <p className="text-xs font-noto_serif font-medium text-campus-text text-right">*including Tax</p>
           <form onSubmit={handleSubmit} >
-            <button className="font-noto_serif font-medium text-white mt-3 w-full rounded-full bg-campus-red py-2 hover:bg-campus-accent" >Check out</button>
+            <button className="font-noto_serif font-medium text-white mt-3 w-full rounded-full bg-campus-red py-2 hover:bg-campus-accent" >Checkout</button>
           </form>
         </div>
       </div>
