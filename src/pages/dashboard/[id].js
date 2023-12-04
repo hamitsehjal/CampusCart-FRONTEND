@@ -21,20 +21,10 @@ const Dashboard = () => {
     }
   }
 
-  const [category, setCategory] = useState('all');
+  // const [category, setCategory] = useState('all');
 
   // Extract the Product Details 
-  const { productsData, productsError, productsLoading } = useProducts(storeId, category, options);
-  console.log(`StoreId received: ${storeId}; Options: ${JSON.stringify(options.headers, null, 2)}`);
-  console.log(`Products Data: ${productsData}`)
-
-
-  // Extract the Product Categories 
-  //const { productCategoriesData, productCategoriesError, productsCategoriesLoading } = useProductCategories(options);
-
-  //console.log(productCategoriesData.categories)
-  // const categories = productCategoriesData.categories;
-  // const categories = productCategoriesData.categories;
+  const { productsData, productsError, productsLoading } = useProducts(storeId, "all", options);
 
 
 
@@ -44,6 +34,12 @@ const Dashboard = () => {
   const [isAddModalOpen, setAddModalOpen] = useState(false);
 
   const clearFormData = {
+    name: "",
+    price: 0,
+    quantity: 0,
+    category: "",
+    description: "",
+    profile: null,
   };
   const [formData, setFormData] = useState(clearFormData);
 
@@ -106,6 +102,8 @@ const Dashboard = () => {
         isAddModalOpen={isAddModalOpen}
         closeAddModal={closeAddModal}
         formData={formData}
+        setFormData={setFormData}
+        clearFormData={clearFormData}
         handleImageChange={handleImageChange}
         removeProfile={removeProfile}
         dummyProducts={productsData}
