@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { TrackingDetails } from "./order-confirmation/trackingDetails";
-import { Services } from "./order-confirmation/services";
+import { TrackingDetails } from "../components/order-confirmation/trackingDetails";
+import { Services } from "../components/order-confirmation/services";
 import { readToken, removeCartItems } from "lib/authenticate";
 
 const OrderConfirmation = () => {
