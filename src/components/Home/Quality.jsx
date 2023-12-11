@@ -37,7 +37,7 @@ export const Quality = () => {
                 Discover the Finest Selection of Nutrient-Rich, Fresh Groceries
               </h1>
               <p className='lg:text-base text-gray-700 md:text-sm sm:text-xs text-sm'>
-                At our grocery website, we are committed to providing you with the highest quality, healthiest, and freshest grocery items available from top stores. Here's why our products stand out:
+                At our grocery website, we are committed to providing you with the highest quality, healthiest, and freshest grocery items available from top stores. Here&apos;s why our products stand out:
               </p>
             </div>
             <div className='lg:space-y-6 sm:space-y-4 space-y-5'>

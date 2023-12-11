@@ -14,7 +14,7 @@ export const TrackingDetails = () => {
           <p className="mb-4">Delivered by:</p>
         </div>
         <div className='col'>
-          <p className="font-bold mb-4 "> September 12, 2023</p>
+          <p className="font-bold mb-4 "> December 4, 2023</p>
         </div>
         <div className='col'>
           <p className="mb-4">Delivered to:</p>

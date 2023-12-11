@@ -38,7 +38,7 @@ const ProductList = ({ dummyProducts, openUpdateModal, handleDelete }) => {
                 alt={`${product.name} Image`}
                 style={{ width: '200px', height: '180px' }}
                 width='200'
-                height='180'
+                height='300'
               />
             </div>
           </div>

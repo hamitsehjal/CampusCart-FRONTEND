@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Link from 'next/link'
 const PartnerConfirmation = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-gray-200">
@@ -9,9 +9,9 @@ const PartnerConfirmation = () => {
             <h2 className="text-3xl text-campus-text font-cinzel mb-8">Thank You For</h2>
             <h3 className="text-3xl text-campus-text font-cinzel mb-8">Submitting Your Details</h3>
             <p className="text-xl font-noto_serif font-medium mb-6">Our team will contact you.</p>
-            <a href="/" className="mt-3 inline-block w-96 bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent">
+            <Link href="/" className="mt-3 inline-block w-96 bg-campus-red text-white font-noto_serif font-medium py-2 px-4 rounded-md hover:bg-campus-accent">
               Browse →
-            </a>
+            </Link>
           </div>
         </div>
       </div>

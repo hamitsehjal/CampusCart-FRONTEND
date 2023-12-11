@@ -39,6 +39,15 @@ export default function Products() {
   // Extract the Products Details
   const { productsData, productsError, productsLoading } = useProducts(storeId, category, options);
 
+  if (productsLoading || productsCategoriesLoading) {
+    // Render loading state
+    return <p>Loading...</p>;
+  }
+
+  if (productsError || productCategoriesError) {
+    // Render error state
+    return <p>Error: {productsError.message}</p>;
+  }
   return (
     <div className="bg-campus-background p-4 md:p-8 lg:p-10">
       <h1 className="text-2xl md:text-3xl font-noto_serif ">Products </h1>
