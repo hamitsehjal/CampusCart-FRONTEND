@@ -26,7 +26,7 @@ const PUBLIC_ROUTES = [
   '/confirm-partner',
   '/stores',
   '/cart',
-  '/dashboard'
+  '/dashboard',
 ];
 export default function RouteGuard(props) {
   const router = useRouter();
@@ -49,7 +49,7 @@ export default function RouteGuard(props) {
   // authCheck()
   function authCheck(url) {
     const path = url.split('?')[0];
-    console.log(path)
+    console.log(path);
     if (!PUBLIC_ROUTES.includes(path)) {
       if (path.startsWith('/dashboard/')) {
         // trying to access store Dashboard

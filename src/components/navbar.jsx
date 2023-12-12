@@ -83,7 +83,7 @@ export default function Navbar() {
           
           {token && <Link
             className="flex flex-row gap-2 items-center"
-            href="#"  
+            href="/profile-update"  
           >
             <CgProfile className="h-6 w-6" />
           </Link>}
@@ -145,7 +145,7 @@ export default function Navbar() {
 
             {token && <Link
             className="flex flex-row gap-2 items-center"
-            href="#" 
+            href="/profile-update" 
           >
             <CgProfile className="h-6 w-6" />
             <span className="text-sm">Profile</span>
